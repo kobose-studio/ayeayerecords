@@ -1,7 +1,6 @@
 :root {
-    --neon-yellow: #E8FF00;
+    --neon-yellow: #E8FF00; /* Giallo Segnale */
     --black: #050505;
-    --accent-color: #D64933; /* Rosso Magma del bottone */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,7 +16,6 @@ body {
 
 #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 
-/* Effetto righe monitor CRT */
 body::after {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
@@ -26,7 +24,6 @@ body::after {
 
 .main-ui { position: relative; z-index: 10; pointer-events: none; height: 100%; }
 
-/* HEADER IN ALTO A SINISTRA */
 .terminal-header {
     position: fixed; top: 30px; left: 40px;
     display: flex; flex-direction: column; gap: 5px;
@@ -42,21 +39,16 @@ body::after {
 
 .tagline { font-size: 0.8rem; opacity: 0.8; letter-spacing: 2px; }
 
-.mobile-text { display: none; }
-
-/* REGISTRO TRACCIA: IN PENOMBRA DI DEFAULT */
 .track-log { 
     font-size: 0.6rem; 
     color: var(--neon-yellow);
-    opacity: 0.15; /* PENOMBRA INIZIALE */
+    opacity: 0.15; 
     transition: opacity 0.8s ease; 
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
-.track-log.active { 
-    opacity: 0.7; /* LUCE ALL'ATTIVAZIONE */
-}
+.track-log.active { opacity: 0.7; }
 
 footer {
     position: fixed; bottom: 30px; width: 100%;
@@ -74,17 +66,17 @@ footer {
     color: var(--neon-yellow); text-decoration: none; font-size: 0.9rem;
     transition: 0.3s; display: flex; align-items: center; gap: 10px;
 }
-.footer-link:hover { color: var(--accent-color); }
+.footer-link:hover { opacity: 1; text-shadow: 0 0 10px var(--neon-yellow); }
 
-/* INNESCO SONORO NEL FOOTER (Style Framed Rettangolare Analogico) */
-.command-center { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+.command-center { display: flex; flex-direction: column; align-items: flex-end; gap: 15px; }
 
+/* BOTTONE GIALLO NEON (Sincronizzato con la grafica) */
 .beat-btn {
     padding: 10px 25px;
-    min-width: 180px; /* DIMENSIONE FISSA */
+    min-width: 180px;
     background-color: transparent !important;
-    border: 2px solid var(--accent-color) !important; /* Cornice rossa */
-    color: var(--accent-color) !important;
+    border: 2px solid var(--neon-yellow) !important;
+    color: var(--neon-yellow) !important;
     font-family: 'Space Mono', monospace !important;
     font-size: 0.9rem;
     letter-spacing: 2px;
@@ -95,28 +87,28 @@ footer {
     outline: none;
 }
 
-.beat-btn:hover {
-    background-color: rgba(214, 73, 51, 0.1) !important;
-    box-shadow: 0 0 15px rgba(214, 73, 51, 0.4);
+.beat-btn:hover, .beat-btn.playing {
+    background-color: rgba(232, 255, 0, 0.1) !important;
+    box-shadow: 0 0 20px var(--neon-yellow);
 }
 
 .beat-btn.playing {
-    animation: pulse-magma 2s infinite;
-    background-color: rgba(214, 73, 51, 0.15) !important;
+    animation: pulse-yellow 2s infinite;
 }
 
-@keyframes pulse-magma {
-    0% { box-shadow: 0 0 5px rgba(214, 73, 51, 0.2); }
-    50% { box-shadow: 0 0 20px rgba(214, 73, 51, 0.6); }
-    100% { box-shadow: 0 0 5px rgba(214, 73, 51, 0.2); }
+@keyframes pulse-yellow {
+    0% { box-shadow: 0 0 5px rgba(232, 255, 0, 0.2); }
+    50% { box-shadow: 0 0 25px rgba(232, 255, 0, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(232, 255, 0, 0.2); }
 }
 
 .serial-number { font-size: 0.7rem; opacity: 0.5; letter-spacing: 2px; }
 
 @media (max-width: 768px) {
     .terminal-header { top: 20px; left: 20px; }
-    h1.logo-text { font-size: clamp(2rem, 12vw, 4rem); line-height: 0.85; margin-bottom: 10px; }
+    h1.logo-text { font-size: clamp(2rem, 12vw, 4rem); line-height: 0.85; }
     footer { flex-direction: column; align-items: center; gap: 20px; padding: 20px; }
     .footer-block { align-items: center;}
     .beat-btn { min-width: 150px; } 
+    .command-center { align-items: center; }
 }
