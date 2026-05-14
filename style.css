@@ -1,5 +1,5 @@
 :root {
-    --neon-yellow: #E8FF00;
+    --neon-yellow: #f0ff00; /* Giallo Segnale Logo Unificato */
     --black: #050505;
 }
 
@@ -24,23 +24,16 @@ body::after {
 }
 .overlay-section.active { display: flex; animation: scanFade 0.5s ease-in-out; }
 
-@keyframes scanFade {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 .content-box { max-width: 800px; margin: 0 auto; width: 100%; }
 .content-box h2 { font-size: 2rem; margin-bottom: 30px; border-bottom: 1px solid var(--neon-yellow); padding-bottom: 10px; }
 .content-box p { margin-bottom: 20px; line-height: 1.6; font-size: 1.1rem; }
 
-/* CONNECT GRID STYLING */
 .contact-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 20px; }
 .node span { display: block; font-size: 0.7rem; opacity: 0.5; margin-bottom: 5px; letter-spacing: 2px; }
 .node p { font-size: 1.2rem; margin-bottom: 0; border-left: 1px solid var(--neon-yellow); padding-left: 15px; }
 
-/* RELEASES STYLING */
-.release-item { border-left: 1px solid rgba(232, 255, 0, 0.3); padding-left: 20px; margin-bottom: 40px; }
-.release-item.highlight { background: rgba(232, 255, 0, 0.05); padding: 20px; border-left: 2px solid var(--neon-yellow); }
+.release-item { border-left: 1px solid rgba(240, 255, 0, 0.3); padding-left: 20px; margin-bottom: 40px; }
+.release-item.highlight { background: rgba(240, 255, 0, 0.05); padding: 20px; border-left: 2px solid var(--neon-yellow); }
 .signal-tag { font-size: 0.6rem; color: var(--black); background: var(--neon-yellow); display: inline-block; padding: 2px 8px; margin-bottom: 20px; }
 
 .release-link {
@@ -63,7 +56,6 @@ body::after {
     color: var(--neon-yellow); padding: 5px 15px; cursor: pointer; font-family: inherit;
 }
 
-/* HEADER & NAVIGATION */
 .terminal-header { position: fixed; top: 30px; left: 40px; z-index: 10; cursor: pointer; }
 .logo-text { font-size: clamp(2rem, 10vw, 5rem); border-bottom: 2px solid var(--neon-yellow); display: inline-block; padding-bottom: 5px; letter-spacing: -2px; }
 .tagline { font-size: 0.8rem; opacity: 0.8; letter-spacing: 2px; }
@@ -72,7 +64,6 @@ body::after {
 .cmd-link { text-decoration: none; color: var(--neon-yellow); font-size: 1.2rem; font-weight: 700; opacity: 0.4; transition: 0.3s; width: fit-content; }
 .cmd-link:hover { opacity: 1; transform: translateX(10px); }
 
-/* BEAT BUTTON POSITIONS */
 .volcano-sound-container.right-axis {
     position: fixed; right: 40px; top: 50%; transform: translateY(-50%);
     z-index: 20; display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
@@ -82,18 +73,16 @@ body::after {
     padding: 12px 30px; min-width: 200px; background: transparent!important; border: 2px solid var(--neon-yellow)!important;
     color: var(--neon-yellow)!important; font-family: inherit; font-size: 1rem; cursor: pointer; pointer-events: auto;
 }
-.beat-btn.playing { animation: pulse 2s infinite; background: rgba(232, 255, 0, 0.1)!important; }
+.beat-btn.playing { animation: pulse 2s infinite; background: rgba(240, 255, 0, 0.1)!important; }
 @keyframes pulse { 50% { box-shadow: 0 0 20px var(--neon-yellow); } }
 
 .track-log { font-size: 0.65rem; opacity: 0.15; transition: 0.8s; text-transform: uppercase; letter-spacing: 2px; }
 .track-log.active { opacity: 1; }
 
-/* FOOTER */
 footer { position: fixed; bottom: 30px; width: 100%; padding: 0 40px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 20; pointer-events: none; }
 .footer-block { pointer-events: auto; }
 .footer-link { color: var(--neon-yellow); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
 
-/* MOBILE FIX */
 @media (max-width: 768px) {
     .volcano-sound-container.right-axis {
         right: auto; left: 50%; top: 60%; transform: translate(-50%, -50%);
