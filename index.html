@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=13.0">
+    <link rel="stylesheet" href="style.css?v=14.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -24,10 +24,16 @@
             <div class="tagline">// SONIC ARCHEOLOGY // 0/1 //</div>
         </header>
 
+        <nav class="grid-nav">
+            <a href="javascript:void(0)" onclick="openSection('releases-sec')" class="grid-link">[ LOG_RELEASES ]</a>
+            <a href="javascript:void(0)" onclick="openSection('manifesto-sec')" class="grid-link">[ PROTOCOL ]</a>
+            <a href="javascript:void(0)" onclick="openSection('connect-sec')" class="grid-link">[ CONNECT ]</a>
+        </nav>
+
         <section id="manifesto-sec" class="overlay-section">
-            <button class="close-btn" onclick="closeAllSections()">[ CLOSE_X ]</button>
+            <div class="overlay-close" onclick="closeAllSections()">[ CLOSE_X ]</div>
             <div class="content-box">
-                <h2>[ MANIFESTO ]</h2>
+                <h2>[ PROTOCOL ]</h2>
                 <p class="intro">Milan based Lab & Independent Digital Label.</p>
                 <p>We are a playground for sonic evolution. Our mission is simple: to capture the universal frequency of inclusion through the only language that matters: Music.</p>
                 <p>We don't just sign artists; we seek emotional affinity and intellectual sincerity. We believe in the "human groove" and in the honest expression of the soul. Whether it’s a beat, a bassline, or a silence, if it’s sincere, it’s Aye Aye.</p>
@@ -36,7 +42,7 @@
         </section>
 
         <section id="releases-sec" class="overlay-section">
-            <button class="close-btn" onclick="closeAllSections()">[ CLOSE_X ]</button>
+            <div class="overlay-close" onclick="closeAllSections()">[ CLOSE_X ]</div>
             <div class="content-box">
                 <h2>[ LOG_RELEASES ]</h2>
                 <div class="upcoming-release">
@@ -55,7 +61,7 @@
                     </div>
                     <div class="release-item">
                         <span class="date">[ 2023 ]</span>
-                        <h3>KOBOSE X MONOLITE</h3>
+                        <h3>KOBOSE X MONOLITE - MONOLITE SOUNDSCAPES INTRO</h3>
                         <a href="https://distrokid.com/hyperfollow/8b/monolite-soundscapes-intro" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
                     </div>
                     <div class="release-item">
@@ -68,7 +74,7 @@
         </section>
 
         <section id="connect-sec" class="overlay-section">
-            <button class="close-btn" onclick="closeAllSections()">[ CLOSE_X ]</button>
+            <div class="overlay-close" onclick="closeAllSections()">[ CLOSE_X ]</div>
             <div class="content-box">
                 <h2>[ CONNECT_NODES ]</h2>
                 <div class="contact-grid">
@@ -91,37 +97,29 @@
     </div>
 
     <footer>
-        <div class="footer-main">
-            <div class="footer-block left">
-                <nav class="command-menu">
-                    <a href="javascript:void(0)" onclick="openSection('releases-sec')" class="cmd-link">[ LOG_RELEASES ]</a>
-                    <a href="javascript:void(0)" onclick="openSection('manifesto-sec')" class="cmd-link">[ MANIFESTO ]</a>
-                    <a href="javascript:void(0)" onclick="openSection('connect-sec')" class="cmd-link">[ CONNECT ]</a>
-                </nav>
-                <a href="mailto:info@ayeayerecords.com" target="_blank" class="footer-link">
+        <div class="footer-top">
+            <div class="footer-corner-link left">
+                <a href="mailto:info@ayeayerecords.com" target="_blank" class="corner-link">
                     <i class="fa-regular fa-envelope"></i>
-                    <span>info@ayeayerecords.com</span>
+                    <span>Booking | info@ayeayerecords.com</span>
                 </a>
             </div>
 
-            <div class="footer-block center">
-                <img src="media/AyeAyeRecords_col.png" alt="Aye Aye Records" class="footer-logo">
+            <div class="footer-center">
+                <img src="media/AyeAyeRecords_col.png" alt="Logo" class="footer-logo">
             </div>
 
-            <div class="footer-block right">
-                <a href="https://www.instagram.com/ayeayerecords" target="_blank" class="footer-link">
+            <div class="footer-corner-link right">
+                <a href="https://www.instagram.com/ayeayerecords" target="_blank" class="corner-link">
                     <span>Instagram</span>
                     <i class="fa-brands fa-instagram"></i>
                 </a>
             </div>
         </div>
 
-        <div class="footer-legal">
-            <div class="legal-wrap">
-                <span>© AYE AYE RECORDS 2026</span>
-                <span class="legal-sep">//</span>
-                <span>P.IVA 07078660961</span>
-            </div>
+        <div class="footer-bottom-legal">
+            <div class="legal-left">© AYE AYE RECORDS 2026</div>
+            <div class="legal-right">P.IVA 07078660961</div>
         </div>
     </footer>
 
