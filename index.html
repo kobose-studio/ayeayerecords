@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=11.0">
+    <link rel="stylesheet" href="style.css?v=13.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -39,7 +39,6 @@
             <button class="close-btn" onclick="closeAllSections()">[ CLOSE_X ]</button>
             <div class="content-box">
                 <h2>[ LOG_RELEASES ]</h2>
-                
                 <div class="upcoming-release">
                     <div class="signal-tag">SIGNAL_LOCKED: UPCOMING</div>
                     <div class="release-item highlight">
@@ -48,48 +47,21 @@
                         <p class="desc">New high-frequency sonic interdiction in development.</p>
                     </div>
                 </div>
-
                 <div class="release-list">
                     <div class="release-item">
                         <span class="date">[ 30.08.2023 ]</span>
                         <h3>CIRCOLO PROVARCI - 8B</h3>
-                        <p class="desc">Experimental release carrying a "motivational disco" message, a mantra for the soul exploration. [cite: 8, 133, 134]</p>
                         <a href="https://distrokid.com/hyperfollow/8b/circolo-provarci-discolow-remix-2" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
                     </div>
-
                     <div class="release-item">
                         <span class="date">[ 2023 ]</span>
-                        <h3>KOBOSE X MONOLITE - MONOLITE SOUNDSCAPES INTRO</h3>
-                        <p class="desc">Collaborative journey into ambient textures and modular soundscapes.</p>
+                        <h3>KOBOSE X MONOLITE</h3>
                         <a href="https://distrokid.com/hyperfollow/8b/monolite-soundscapes-intro" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
                     </div>
-
                     <div class="release-item">
                         <span class="date">[ 08.12.2022 ]</span>
-                        <h3>DONE THIS WAY - 8B & THE AYE AYE DUBNTONE SYSTEM</h3>
-                        <p class="desc">Final component of the reggae roots dub project. An ode to Mother Earth and the preservation of the seed. [cite: 24, 176, 177]</p>
+                        <h3>DONE THIS WAY - 8B</h3>
                         <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/done-this-way" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
-                    </div>
-
-                    <div class="release-item">
-                        <span class="date">[ 08.10.2022 ]</span>
-                        <h3>BL4CKM4N - 8B & THE AYE AYE DUBNTONE SYSTEM</h3>
-                        <p class="desc">Deep instrumental grooveline with dub sounds and soaring vocals, creating a 'rootsy mantra' track. [cite: 48, 202]</p>
-                        <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/bl4ckm4n" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
-                    </div>
-
-                    <div class="release-item">
-                        <span class="date">[ 08.08.2022 ]</span>
-                        <h3>100 SKIES - 8B & THE AYE AYE DUBNTONE SYSTEM</h3>
-                        <p class="desc">A snapshot of a collaboration between Milan and Jamaica through Roots Reggae and Dub culture. [cite: 73, 74, 257, 258]</p>
-                        <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/100-skies" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
-                    </div>
-
-                    <div class="release-item">
-                        <span class="date">[ 2022 ]</span>
-                        <h3>SWING ME FOR A WHILE - 8B</h3>
-                        <p class="desc">Spontaneous homage to jazz, bebop and swing culture; the digital result of analogue emotions. [cite: 88, 91, 277, 280]</p>
-                        <a href="https://distrokid.com/hyperfollow/8b/swing-me-for-a-while" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
                     </div>
                 </div>
             </div>
@@ -119,23 +91,37 @@
     </div>
 
     <footer>
-        <div class="footer-block left">
-            <nav class="command-menu">
-                <a href="javascript:void(0)" onclick="openSection('releases-sec')" class="cmd-link">[ LOG_RELEASES ]</a>
-                <a href="javascript:void(0)" onclick="openSection('manifesto-sec')" class="cmd-link">[ MANIFESTO ]</a>
-                <a href="javascript:void(0)" onclick="openSection('connect-sec')" class="cmd-link">[ CONNECT ]</a>
-            </nav>
-            <a href="mailto:info@ayeayerecords.com" target="_blank" class="footer-link">
-                <i class="fa-regular fa-envelope"></i>
-                <span>Booking | info@ayeayerecords.com</span>
-            </a>
+        <div class="footer-main">
+            <div class="footer-block left">
+                <nav class="command-menu">
+                    <a href="javascript:void(0)" onclick="openSection('releases-sec')" class="cmd-link">[ LOG_RELEASES ]</a>
+                    <a href="javascript:void(0)" onclick="openSection('manifesto-sec')" class="cmd-link">[ MANIFESTO ]</a>
+                    <a href="javascript:void(0)" onclick="openSection('connect-sec')" class="cmd-link">[ CONNECT ]</a>
+                </nav>
+                <a href="mailto:info@ayeayerecords.com" target="_blank" class="footer-link">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>info@ayeayerecords.com</span>
+                </a>
+            </div>
+
+            <div class="footer-block center">
+                <img src="media/AyeAyeRecords_col.png" alt="Aye Aye Records" class="footer-logo">
+            </div>
+
+            <div class="footer-block right">
+                <a href="https://www.instagram.com/ayeayerecords" target="_blank" class="footer-link">
+                    <span>Instagram</span>
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
         </div>
 
-        <div class="footer-block right">
-            <a href="https://www.instagram.com/ayeayerecords" target="_blank" class="footer-link">
-                <span>Instagram</span>
-                <i class="fa-brands fa-instagram"></i>
-            </a>
+        <div class="footer-legal">
+            <div class="legal-wrap">
+                <span>© AYE AYE RECORDS 2026</span>
+                <span class="legal-sep">//</span>
+                <span>P.IVA 07078660961</span>
+            </div>
         </div>
     </footer>
 
