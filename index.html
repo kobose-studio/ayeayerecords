@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="style.css?v=4.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -24,25 +24,29 @@
         </header>
     </main>
 
+    <div class="volcano-sound-container">
+        <button id="beat-btn" class="beat-btn" onclick="toggleBeat()">[ BEAT: OFF ]</button>
+        <div id="track-log" class="track-log">LOG: GILLESTEP - DISCOLOW [2026]</div>
+    </div>
+
     <footer>
         <div class="footer-block left">
+            <nav class="command-menu">
+                <a href="#releases" class="cmd-link">[ LOG_RELEASES ]</a>
+                <a href="#archive" class="cmd-link">[ TRACK_ARCHIVE ]</a>
+                <a href="#connect" class="cmd-link">[ CONNECT ]</a>
+            </nav>
             <a href="mailto:info@ayeayerecords.com" target="_blank" class="footer-link mail-link">
                 <i class="fa-regular fa-envelope"></i>
                 <span>Booking | info@ayeayerecords.com</span>
             </a>
         </div>
 
-        <div class="footer-block center"></div>
-
         <div class="footer-block right">
-            <div class="command-center">
-                <div id="track-log" class="track-log">LOG: GILLESTEP - DISCOLOW [2026]</div>
-                <button id="beat-btn" class="beat-btn" onclick="toggleBeat()">[ BEAT: OFF ]</button>
-                <a href="https://www.instagram.com/ayeayerecords" target="_blank" class="footer-link insta-link">
-                    <span>Instagram</span>
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-            </div>
+            <a href="https://www.instagram.com/ayeayerecords" target="_blank" class="footer-link insta-link">
+                <span>Instagram</span>
+                <i class="fa-brands fa-instagram"></i>
+            </a>
         </div>
     </footer>
 
@@ -99,6 +103,6 @@
             isPlaying = !isPlaying;
         }
     </script>
-    <script src="sketch.js?v=3.0"></script>
+    <script src="sketch.js?v=4.0"></script>
 </body>
 </html>
