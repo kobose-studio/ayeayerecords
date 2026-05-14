@@ -1,49 +1,47 @@
-let circles = [];
+let pulses = [];
+let gridScl = 50;
 
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas-container');
-    noFill();
-    strokeWeight(1);
 }
 
 function draw() {
-    background(5, 40); // Scia di movimento
+    background(5, 50); // Scia per l'effetto radar
+    
+    let amp = window.audioAmp || 0;
 
-    // Ogni volta che il mouse si muove, emette un "impulso" radar
-    if (mouseIsPressed || frameCount % 20 === 0) {
-        circles.push(new RadarPulse(mouseX, mouseY));
+    // Griglia Radar
+    stroke(232, 255, 0, 30);
+    for(let x = 0; x < width; x += gridScl) line(x, 0, x, height);
+    for(let y = 0; y < height; y += gridScl) line(0, y, width, y);
+
+    // Se l'audio suona, emetti impulsi automatici al ritmo
+    if (amp > 50 && frameCount % 10 === 0) {
+        pulses.push(new Pulse(random(width), random(height), amp/2));
     }
 
-    for (let i = circles.length - 1; i >= 0; i--) {
-        circles[i].update();
-        circles[i].display();
-        if (circles[i].isDead()) {
-            circles.splice(i, 1);
-        }
-    }
+    // Interazione mouse
+    if (mouseIsPressed) pulses.push(new Pulse(mouseX, mouseY, 20));
 
-    // Griglia statica di background
-    drawGrid();
+    for (let i = pulses.length - 1; i >= 0; i--) {
+        pulses[i].update();
+        pulses[i].show();
+        if (pulses[i].dead()) pulses.splice(i, 1);
+    }
 }
 
-class RadarPulse {
-    constructor(x, y) {
-        this.x = x; this.y = y;
-        this.r = 0; this.alpha = 255;
+class Pulse {
+    constructor(x, y, startR) {
+        this.x = x; this.y = y; this.r = startR; this.a = 255;
     }
-    update() { this.r += 4; this.alpha -= 2; }
-    display() {
-        stroke(232, 255, 0, this.alpha);
+    update() { this.r += 5; this.a -= 4; }
+    show() {
+        noFill();
+        stroke(232, 255, 0, this.a);
         ellipse(this.x, this.y, this.r);
     }
-    isDead() { return this.alpha <= 0; }
-}
-
-function drawGrid() {
-    stroke(232, 255, 0, 20);
-    for (let i = 0; i < width; i += 50) line(i, 0, i, height);
-    for (let j = 0; j < height; j += 50) line(0, j, width, j);
+    dead() { return this.a <= 0; }
 }
 
 function windowResized() { resizeCanvas(windowWidth, windowHeight); }
