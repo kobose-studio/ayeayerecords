@@ -4,33 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AYE AYE RECORDS | Signal Command</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="style.css?v=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
+
+    <div class="serial-number">STATUS: TRANSMITTING... // AYE AYE RECORDS</div>
+
     <div id="canvas-container"></div>
-    <div class="terminal-overlay"></div>
 
-    <main class="dashboard">
-        <header>
-            <div class="status-bar">STATUS: TRANSMITTING...</div>
-            <h1 class="logo-text">AYE AYE RECORDS</h1>
-            <p class="tagline">Independent Label // Sonic Archeology // 0/1</p>
-        </header>
-
-        <nav class="command-menu">
-            <a href="#artists" class="cmd-btn">[ ARTISTS ]</a>
-            <a href="#releases" class="cmd-btn">[ LOG_RELEASES ]</a>
-            <a href="#contact" class="cmd-btn">[ CONNECT ]</a>
-        </nav>
+    <main class="main-ui">
+        <div class="central-stack">
+            <h1 class="logo-text">
+                <span class="desktop-text">AYE AYE RECORDS</span>
+                <span class="mobile-text">AYE AYE<br>RECORDS</span>
+            </h1>
+            <div class="tagline">// SONIC ARCHEOLOGY // 0/1 //</div>
+        </div>
     </main>
 
-    <footer class="footer-info">
-        <div class="coordinates">00.00°N / 00.00°E</div>
-        <div class="copyright">© 2026 AYEAYERECORDS.COM</div>
+    <div class="command-center">
+        <button id="beat-btn" onclick="toggleBeat()">BEAT: OFF</button>
+        <div id="track-info" class="track-credits">LOG: LOVEWELL - 8B & I CHILIMANGIARO</div>
+    </div>
+
+    <footer>
+        <div class="footer-block left">
+            <a href="mailto:info@chilimangiaro.com" target="_blank" class="footer-link">
+                <span>Booking | info@chilimangiaro.com</span>
+            </a>
+        </div>
+
+        <div class="footer-block right">
+            <a href="https://www.instagram.com/ichilimangiaro/" target="_blank" class="footer-link">
+                <span>Instagram</span>
+            </a>
+        </div>
     </footer>
 
-    <script src="sketch.js"></script>
+    <audio id="audio-track" loop preload="auto" crossorigin="anonymous">
+        <source src="media/Discolow_Gillestep.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let audio = document.getElementById('audio-track');
+        let btn = document.getElementById('beat-btn');
+        let trackInfo = document.getElementById('track-info');
+        let isPlaying = false;
+
+        window.audioAmp = 0;
+        let audioCtx, analyser, source, dataArray;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 256;
+                source = audioCtx.createMediaElementSource(audio);
+                source.connect(analyser);
+                analyser.connect(audioCtx.destination);
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                
+                function update() {
+                    requestAnimationFrame(update);
+                    if (isPlaying) {
+                        analyser.getByteFrequencyData(dataArray);
+                        let sum = 0;
+                        for(let i=0; i<dataArray.length; i++) sum += dataArray[i];
+                        window.audioAmp = sum / dataArray.length;
+                    } else { window.audioAmp = 0; }
+                }
+                update();
+            }
+        }
+
+        function toggleBeat() {
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            if (isPlaying) {
+                audio.pause();
+                btn.innerText = "BEAT: OFF";
+                btn.classList.remove('active');
+                trackInfo.classList.remove('active');
+            } else {
+                audio.play();
+                btn.innerText = "BEAT: ON";
+                btn.classList.add('active');
+                trackInfo.classList.add('active');
+            }
+            isPlaying = !isPlaying;
+        }
+    </script>
+    <script src="sketch.js?v=1.0"></script>
 </body>
 </html>
