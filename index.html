@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css?v=2.0">
+    <link rel="stylesheet" href="style.css?v=3.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -22,24 +22,26 @@
             <h1 class="logo-text">AYE AYE RECORDS</h1>
             <div class="tagline">// SONIC ARCHEOLOGY // 0/1 //</div>
         </header>
-
-        </main>
+    </main>
 
     <footer>
         <div class="footer-block left">
-            <a href="mailto:info@chilimangiaro.com" target="_blank" class="footer-link mail-link">
+            <a href="mailto:info@ayeayerecords.com" target="_blank" class="footer-link mail-link">
                 <i class="fa-regular fa-envelope"></i>
-                <span>Booking | info@chilimangiaro.com</span>
+                <span>Booking | info@ayeayerecords.com</span>
             </a>
         </div>
 
-        <div class="footer-block center">
-            </div>
+        <div class="footer-block center"></div>
 
         <div class="footer-block right">
             <div class="command-center">
                 <div id="track-log" class="track-log">LOG: GILLESTEP - DISCOLOW [2026]</div>
                 <button id="beat-btn" class="beat-btn" onclick="toggleBeat()">[ BEAT: OFF ]</button>
+                <a href="https://www.instagram.com/ayeayerecords" target="_blank" class="footer-link insta-link">
+                    <span>Instagram</span>
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
             </div>
         </div>
     </footer>
@@ -87,16 +89,16 @@
                 audio.pause();
                 btn.innerText = "[ BEAT: OFF ]";
                 btn.classList.remove('playing');
-                trackLog.classList.remove('active'); // Torna in penombra
+                trackLog.classList.remove('active');
             } else {
                 audio.play();
                 btn.innerText = "[ BEAT: ON ]";
                 btn.classList.add('playing');
-                trackLog.classList.add('active'); // Si accende
+                trackLog.classList.add('active');
             }
             isPlaying = !isPlaying;
         }
     </script>
-    <script src="sketch.js?v=2.0"></script>
+    <script src="sketch.js?v=3.0"></script>
 </body>
 </html>
