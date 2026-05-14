@@ -21,119 +21,76 @@ body::after {
     background-size: 100% 4px; z-index: 2; pointer-events: none;
 }
 
-/* HEADER */
-.terminal-header {
-    position: fixed; top: 30px; left: 40px;
-    z-index: 10;
+/* UI OVERLAYS */
+.overlay-section {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(5, 5, 5, 0.95);
+    z-index: 200; display: none;
+    flex-direction: column; padding: 100px 40px;
+    overflow-y: auto;
+}
+.overlay-section.active { display: flex; animation: scanFade 0.5s ease-in-out; }
+
+@keyframes scanFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.logo-text {
-    font-size: clamp(2rem, 10vw, 5rem);
-    border-bottom: 2px solid var(--neon-yellow);
-    display: inline-block; padding-bottom: 5px;
-    letter-spacing: -2px;
+.content-box { max-width: 800px; margin: 0 auto; }
+.content-box h2 { font-size: 2rem; margin-bottom: 30px; border-bottom: 1px solid var(--neon-yellow); padding-bottom: 10px; }
+.content-box p { margin-bottom: 20px; line-height: 1.6; font-size: 1.1rem; }
+.motto { font-weight: 700; margin-top: 40px; color: var(--neon-yellow); }
+
+.close-btn { 
+    position: absolute; top: 40px; right: 40px; background: none; border: 1px solid var(--neon-yellow);
+    color: var(--neon-yellow); padding: 5px 15px; cursor: pointer; font-family: inherit;
 }
 
+/* LOG RELEASES STYLING */
+.release-item { border-left: 2px solid rgba(232, 255, 0, 0.2); padding-left: 20px; margin-bottom: 30px; }
+.release-item h3 { font-size: 1.3rem; }
+.release-item .date { font-size: 0.8rem; opacity: 0.6; }
+.release-item.highlight { border-left: 2px solid var(--neon-yellow); background: rgba(232, 255, 0, 0.05); padding: 20px; }
+.signal-tag { font-size: 0.6rem; background: var(--neon-yellow); color: var(--black); display: inline-block; padding: 2px 8px; margin-bottom: 10px; animation: blink 1s infinite; }
+
+@keyframes blink { 50% { opacity: 0.5; } }
+
+/* HEADER & NAVIGATION */
+.terminal-header { position: fixed; top: 30px; left: 40px; z-index: 10; cursor: pointer; }
+.logo-text { font-size: clamp(2rem, 10vw, 5rem); border-bottom: 2px solid var(--neon-yellow); display: inline-block; padding-bottom: 5px; letter-spacing: -2px; }
 .tagline { font-size: 0.8rem; opacity: 0.8; letter-spacing: 2px; }
 
-/* MENU BASSO-SX: Font più grande */
-.command-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 20px;
-}
+.command-menu { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.cmd-link { text-decoration: none; color: var(--neon-yellow); font-size: 1.2rem; font-weight: 700; opacity: 0.4; transition: 0.3s; width: fit-content; }
+.cmd-link:hover { opacity: 1; transform: translateX(10px); }
 
-.cmd-link {
-    text-decoration: none;
-    color: var(--neon-yellow);
-    font-size: 1.2rem; /* INGRANDITO */
-    font-weight: 700;
-    opacity: 0.4;
-    transition: all 0.3s ease;
-    width: fit-content;
-}
-
-.cmd-link:hover {
-    opacity: 1;
-    transform: translateX(10px);
-    text-shadow: 0 0 10px var(--neon-yellow);
-}
-
-/* BEAT BUTTON: Asse Destro / Mezzeria */
+/* VOLCANO SOUND - RIGHT AXIS / FIX MOBILE */
 .volcano-sound-container.right-axis {
-    position: fixed;
-    right: 40px; /* Allineato con Instagram */
-    top: 50%;
-    transform: translateY(-50%); /* Centratura verticale perfetta */
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Allineato al bordo destro */
-    gap: 10px;
+    position: fixed; right: 40px; top: 50%; transform: translateY(-50%);
+    z-index: 20; display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
 }
 
 .beat-btn {
-    padding: 12px 30px;
-    min-width: 200px;
-    background-color: transparent !important;
-    border: 2px solid var(--neon-yellow) !important;
-    color: var(--neon-yellow) !important;
-    font-family: 'Space Mono', monospace !important;
-    font-size: 1rem;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    border-radius: 0 !important;
-    outline: none;
-    pointer-events: auto;
+    padding: 12px 30px; min-width: 200px; background: transparent!important; border: 2px solid var(--neon-yellow)!important;
+    color: var(--neon-yellow)!important; font-family: inherit; font-size: 1rem; cursor: pointer; pointer-events: auto;
 }
+.beat-btn.playing { animation: pulse 2s infinite; background: rgba(232, 255, 0, 0.1)!important; }
 
-.beat-btn:hover, .beat-btn.playing {
-    background-color: rgba(232, 255, 0, 0.1) !important;
-    box-shadow: 0 0 20px var(--neon-yellow);
-}
-
-.track-log { 
-    font-size: 0.65rem; 
-    opacity: 0.15; 
-    transition: opacity 0.8s ease; 
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-align: right;
-}
-
-.track-log.active { opacity: 1; }
+@keyframes pulse { 50% { box-shadow: 0 0 20px var(--neon-yellow); } }
 
 /* FOOTER */
-footer {
-    position: fixed; bottom: 30px; width: 100%;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between; 
-    align-items: flex-end;
-    z-index: 20;
-    pointer-events: none; 
-}
+footer { position: fixed; bottom: 30px; width: 100%; padding: 0 40px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 20; pointer-events: none; }
+.footer-block { pointer-events: auto; }
+.footer-link { color: var(--neon-yellow); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
 
-.footer-block { pointer-events: auto; display: flex; flex-direction: column; }
-
-.footer-link {
-    color: var(--neon-yellow); text-decoration: none; font-size: 0.9rem;
-    transition: 0.3s; display: flex; align-items: center; gap: 10px;
-}
-.footer-link:hover { opacity: 1; text-shadow: 0 0 10px var(--neon-yellow); }
-
-/* MOBILE FIX */
+/* FIX MOBILE DECENTRAGGIO */
 @media (max-width: 768px) {
-    .terminal-header { top: 20px; left: 20px; }
     .volcano-sound-container.right-axis {
-        right: 20px;
-        top: 60%;
+        right: auto; left: 50%; top: 60%; transform: translate(-50%, -50%); /* CENTRATURA MOBILE */
+        align-items: center;
     }
+    .terminal-header { top: 20px; left: 20px; }
     footer { flex-direction: column; align-items: center; gap: 30px; padding: 20px; text-align: center; }
     .footer-block { align-items: center; }
     .command-menu { align-items: center; }
-    .cmd-link { font-size: 1rem; }
 }
