@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=6.0">
+    <link rel="stylesheet" href="style.css?v=8.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -37,40 +37,9 @@
 
         <section id="releases-sec" class="overlay-section">
             <button class="close-btn" onclick="closeAllSections()">[ CLOSE_X ]</button>
-            <div class="content-box">
-                <h2>[ LOG_RELEASES ]</h2>
-                
-                <div class="upcoming-release">
-                    <div class="signal-tag">SIGNAL_LOCKED: UPCOMING</div>
-                    <div class="release-item highlight">
-                        <span class="date">[ 09.2026 ]</span>
-                        <h3>FUTURE_TRANSMISSION</h3>
-                        <p class="desc">Intercettazione di frequenze asimmetriche in fase di mastering.</p>
-                    </div>
-                </div>
-
-                <div class="release-list">
-                    <div class="release-item">
-                        <span class="date">[ 05.2026 ]</span>
-                        <h3>GILLESTEP - DISCOLOW</h3>
-                        <p class="desc">Archeologia Dubstep. Il primo segnale del vulcano.</p>
-                    </div>
-                    <div class="release-item">
-                        <span class="date">[ 03.2026 ]</span>
-                        <h3>VOID_SCANNER</h3>
-                        <p class="desc">Esplorazione di silenzi digitali e riverberi industriali.</p>
-                    </div>
-                    <div class="release-item">
-                        <span class="date">[ 01.2026 ]</span>
-                        <h3>BINARY_ROOTS</h3>
-                        <p class="desc">Deep techno meets ancestral rhythms.</p>
-                    </div>
-                    <div class="release-item">
-                        <span class="date">[ 11.2025 ]</span>
-                        <h3>SIGNAL_01</h3>
-                        <p class="desc">L'inizio della trasmissione. Fondamenta sonore.</p>
-                    </div>
-                </div>
+            <div class="content-box full-width">
+                <h2>[ LOG_RELEASES_STREAM ]</h2>
+                <iframe src="https://sites.google.com/view/ayeayerecords-com-releases/" class="external-log-frame"></iframe>
             </div>
         </section>
 
@@ -86,10 +55,6 @@
                     <div class="node">
                         <span>PR_SIGNAL:</span>
                         <p>Jane Smith // pr@ayeayerecords.com</p>
-                    </div>
-                    <div class="node">
-                        <span>TECH_UPLINK:</span>
-                        <p>Alan Turing // tech@ayeayerecords.com</p>
                     </div>
                 </div>
             </div>
