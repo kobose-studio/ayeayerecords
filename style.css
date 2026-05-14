@@ -1,5 +1,5 @@
 /* AYE AYE RECORDS - SIGNAL_COMMAND_CSS
-   VERSION: 14.0 [BORN TO BEAT]
+   VERSION: 15.0 [BORN TO BEAT]
 */
 :root {
     --neon-yellow: #f0ff00; 
@@ -28,86 +28,61 @@ body::after {
 .overlay-section.active { display: flex; animation: scanFade 0.4s ease-out; }
 
 .content-box { max-width: 800px; margin: 0 auto; width: 100%; }
+.content-box.wide { max-width: 1000px; }
 .content-box h2 { font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid var(--neon-yellow); padding-bottom: 10px; }
 
-.overlay-close {
-    position: fixed; top: 20px; right: 20px; 
-    color: var(--neon-yellow); font-size: 0.8rem; cursor: pointer;
-    border: 1px solid var(--neon-yellow); padding: 5px 12px; z-index: 210; background: var(--black);
+/* RELEASES CON IMMAGINI */
+.flex-item { display: flex; align-items: flex-start; gap: 30px; }
+.release-item { border-left: 1px solid rgba(240, 255, 0, 0.3); padding-left: 20px; margin-bottom: 50px; }
+.release-item.highlight { background: rgba(240, 255, 0, 0.08); padding: 25px; border-left: 2px solid var(--neon-yellow); }
+
+.release-img {
+    width: 180px;
+    height: 180px;
+    border: 1px solid var(--neon-yellow);
+    filter: grayscale(20%) contrast(110%);
+    transition: 0.4s ease;
+    object-fit: cover;
+}
+.release-item:hover .release-img {
+    filter: grayscale(0%) contrast(100%);
+    box-shadow: 0 0 15px rgba(240, 255, 0, 0.4);
 }
 
-.inline-link { color: var(--neon-yellow); text-decoration: underline; }
-
-/* RELEASES */
-.release-item { border-left: 1px solid rgba(240, 255, 0, 0.3); padding-left: 15px; margin-bottom: 35px; }
-.release-item h3 { font-size: 1.2rem; color: var(--neon-yellow); }
-.release-item.highlight { background: rgba(240, 255, 0, 0.08); padding: 15px; border-left: 2px solid var(--neon-yellow); }
-.release-link { color: var(--neon-yellow); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-top: 10px; display: inline-block; transition: 0.3s; }
+.release-info { flex: 1; }
+.release-item h3 { font-size: 1.3rem; color: var(--neon-yellow); margin-bottom: 10px; }
+.release-link { color: var(--neon-yellow); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-top: 15px; display: inline-block; transition: 0.3s; }
 .release-link:hover { text-shadow: 0 0 10px var(--neon-yellow); transform: translateX(5px); }
 
-/* GRID NAVIGATION */
-.grid-nav {
-    position: fixed; bottom: 140px; left: 40px;
-    display: flex; flex-direction: column; gap: 10px;
-    z-index: 100;
-}
-.grid-link {
-    text-decoration: none; color: var(--neon-yellow);
-    font-size: 1.2rem; font-weight: 700; opacity: 0.5;
-    transition: 0.3s; width: fit-content;
-}
+/* UI ELEMENTS */
+.overlay-close { position: fixed; top: 20px; right: 20px; color: var(--neon-yellow); font-size: 0.8rem; cursor: pointer; border: 1px solid var(--neon-yellow); padding: 5px 12px; z-index: 210; background: var(--black); }
+.grid-nav { position: fixed; bottom: 140px; left: 40px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+.grid-link { text-decoration: none; color: var(--neon-yellow); font-size: 1.2rem; font-weight: 700; opacity: 0.5; transition: 0.3s; width: fit-content; }
 .grid-link:hover { opacity: 1; transform: translateX(8px); text-shadow: 0 0 10px var(--neon-yellow); }
-
-/* HEADER */
 .terminal-header { position: fixed; top: 30px; left: 40px; z-index: 50; cursor: pointer; }
 .logo-text { font-size: clamp(1.8rem, 8vw, 4rem); border-bottom: 2px solid var(--neon-yellow); display: inline-block; padding-bottom: 5px; letter-spacing: -2px; }
 
-/* BEAT CONTROL (Fisso a destra su Desktop, gestito in fondo su Mobile) */
-.volcano-sound-container.right-axis {
-    position: fixed; right: 40px; top: 50%; transform: translateY(-50%);
-    z-index: 150; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
-}
-.beat-btn {
-    padding: 10px 25px; min-width: 170px; background: transparent!important; border: 1px solid var(--neon-yellow)!important;
-    color: var(--neon-yellow)!important; font-family: inherit; font-size: 0.9rem; cursor: pointer; transition: 0.3s;
-}
+/* BEAT CONTROL */
+.volcano-sound-container.right-axis { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 150; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.beat-btn { padding: 10px 25px; min-width: 170px; background: transparent!important; border: 1px solid var(--neon-yellow)!important; color: var(--neon-yellow)!important; font-family: inherit; font-size: 0.9rem; cursor: pointer; transition: 0.3s; }
 .beat-btn.playing { animation: pulse 2s infinite; background: rgba(240, 255, 0, 0.1)!important; }
 @keyframes pulse { 50% { box-shadow: 0 0 15px var(--neon-yellow); } }
 
-.track-log { font-size: 0.55rem; opacity: 0.2; transition: 0.8s; text-transform: uppercase; letter-spacing: 1px; }
-.track-log.active { opacity: 1; }
-
 /* FOOTER */
-footer {
-    position: fixed; bottom: 0; left: 0; width: 100%;
-    z-index: 50; padding: 10px 40px 10px 40px;
-    display: flex; flex-direction: column; gap: 5px;
-    background: rgba(5, 5, 5, 0.9);
-}
+footer { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 50; padding: 10px 40px 10px 40px; display: flex; flex-direction: column; gap: 5px; background: rgba(5, 5, 5, 0.9); }
 .footer-top { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; }
 .footer-logo { height: 45px; width: auto; opacity: 0.8; }
 .corner-link { color: var(--neon-yellow); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; opacity: 0.6; }
 .footer-bottom-legal { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--neon-yellow); opacity: 0.3; letter-spacing: 1px; padding-top: 5px; border-top: 1px solid rgba(240, 255, 0, 0.05); }
 
-/* MOBILE RESPONSIVE FIX (Cruciale per Android) */
+/* MOBILE */
 @media (max-width: 768px) {
+    .flex-item { flex-direction: column; gap: 20px; }
+    .release-img { width: 100%; height: auto; max-width: 300px; }
     .terminal-header { position: relative; top: 20px; left: 20px; margin-bottom: 40px; }
-    .logo-text { font-size: 2.2rem; }
-    
     .grid-nav { position: relative; bottom: auto; left: 20px; margin-bottom: 40px; }
-    .grid-link { font-size: 1.1rem; }
-
-    .volcano-sound-container.right-axis {
-        position: relative; right: auto; top: auto; transform: none;
-        align-items: center; width: 100%; margin: 20px 0 60px 0;
-    }
-    .beat-btn { width: 80%; }
-    .track-log { text-align: center; margin-top: 10px; }
-
-    footer { position: relative; padding: 30px 20px; background: var(--black); }
+    .volcano-sound-container.right-axis { position: relative; right: auto; top: auto; transform: none; align-items: center; width: 100%; margin: 20px 0 60px 0; }
+    footer { position: relative; padding: 30px 20px; }
     .footer-top { flex-direction: column; align-items: center; gap: 25px; }
-    .footer-logo { height: 40px; }
-    .footer-bottom-legal { flex-direction: column; align-items: center; gap: 8px; margin-top: 20px; }
-    
-    body { overflow-y: auto; } /* Permette lo scroll su mobile per evitare accavallamenti */
+    .footer-bottom-legal { flex-direction: column; align-items: center; gap: 8px; }
 }
