@@ -1,6 +1,7 @@
 :root {
     --neon-yellow: #E8FF00;
     --black: #050505;
+    --accent-color: #D64933; /* Rosso Magma del bottone */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,7 +12,7 @@ body {
     font-family: 'Space Mono', monospace;
     height: 100vh;
     overflow: hidden;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    display: flex; flex-direction: column; justify-content: space-between;
 }
 
 #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
@@ -23,44 +24,99 @@ body::after {
     background-size: 100% 4px; z-index: 2; pointer-events: none;
 }
 
-.main-ui { position: relative; z-index: 10; text-align: center; pointer-events: none; }
+.main-ui { position: relative; z-index: 10; pointer-events: none; height: 100%; }
+
+/* HEADER IN ALTO A SINISTRA */
+.terminal-header {
+    position: fixed; top: 30px; left: 40px;
+    display: flex; flex-direction: column; gap: 5px;
+    z-index: 10;
+}
 
 .logo-text {
     font-size: clamp(2rem, 10vw, 5rem);
     border-bottom: 2px solid var(--neon-yellow);
-    display: inline-block; padding-bottom: 10px;
+    display: inline-block; padding-bottom: 5px;
+    letter-spacing: -2px;
 }
+
+.tagline { font-size: 0.8rem; opacity: 0.8; letter-spacing: 2px; }
 
 .mobile-text { display: none; }
 
-.command-center {
-    position: fixed; bottom: 25vh; left: 50%; transform: translateX(-50%);
-    z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 10px;
+/* REGISTRO TRACCIA: IN PENOMBRA DI DEFAULT */
+.track-log { 
+    font-size: 0.6rem; 
+    color: var(--neon-yellow);
+    opacity: 0.15; /* PENOMBRA INIZIALE */
+    transition: opacity 0.8s ease; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-#beat-btn {
-    padding: 10px 30px; background: transparent;
-    border: 2px solid var(--neon-yellow); color: var(--neon-yellow);
-    font-family: 'Space Mono', monospace; letter-spacing: 2px; cursor: pointer;
+.track-log.active { 
+    opacity: 0.7; /* LUCE ALL'ATTIVAZIONE */
 }
-
-#beat-btn.active { background: var(--neon-yellow); color: var(--black); box-shadow: 0 0 20px var(--neon-yellow); }
-
-.track-credits { font-size: 0.6rem; opacity: 0; transition: 0.5s; }
-.track-credits.active { opacity: 0.7; }
 
 footer {
-    position: fixed; bottom: 30px; width: 100%; padding: 0 40px;
-    display: flex; justify-content: space-between; z-index: 10; font-size: 0.7rem;
+    position: fixed; bottom: 30px; width: 100%;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-end;
+    z-index: 20;
+    pointer-events: none; 
 }
 
-.footer-link { color: var(--neon-yellow); text-decoration: none; opacity: 0.6; }
-.footer-link:hover { opacity: 1; }
+.footer-block { pointer-events: auto; display: flex; flex-direction: column; gap: 10px;}
 
-.serial-number { position: fixed; top: 30px; width: 100%; text-align: center; font-size: 0.7rem; opacity: 0.5; }
+.footer-link {
+    color: var(--neon-yellow); text-decoration: none; font-size: 0.9rem;
+    transition: 0.3s; display: flex; align-items: center; gap: 10px;
+}
+.footer-link:hover { color: var(--accent-color); }
+
+/* INNESCO SONORO NEL FOOTER (Style Framed Rettangolare Analogico) */
+.command-center { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+
+.beat-btn {
+    padding: 10px 25px;
+    min-width: 180px; /* DIMENSIONE FISSA */
+    background-color: transparent !important;
+    border: 2px solid var(--accent-color) !important; /* Cornice rossa */
+    color: var(--accent-color) !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    border-radius: 0 !important;
+    outline: none;
+}
+
+.beat-btn:hover {
+    background-color: rgba(214, 73, 51, 0.1) !important;
+    box-shadow: 0 0 15px rgba(214, 73, 51, 0.4);
+}
+
+.beat-btn.playing {
+    animation: pulse-magma 2s infinite;
+    background-color: rgba(214, 73, 51, 0.15) !important;
+}
+
+@keyframes pulse-magma {
+    0% { box-shadow: 0 0 5px rgba(214, 73, 51, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(214, 73, 51, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(214, 73, 51, 0.2); }
+}
+
+.serial-number { font-size: 0.7rem; opacity: 0.5; letter-spacing: 2px; }
 
 @media (max-width: 768px) {
-    .mobile-text { display: inline; }
-    .desktop-text { display: none; }
-    footer { flex-direction: column; align-items: center; gap: 10px; }
+    .terminal-header { top: 20px; left: 20px; }
+    h1.logo-text { font-size: clamp(2rem, 12vw, 4rem); line-height: 0.85; margin-bottom: 10px; }
+    footer { flex-direction: column; align-items: center; gap: 20px; padding: 20px; }
+    .footer-block { align-items: center;}
+    .beat-btn { min-width: 150px; } 
 }
