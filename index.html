@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=6.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -18,11 +18,82 @@
     <div id="canvas-container"></div>
 
     <main class="main-ui">
-        <header class="terminal-header">
+        <header class="terminal-header" onclick="closeAllSections()">
             <div class="serial-number">STATUS: TRANSMITTING... // AYE AYE RECORDS</div>
             <h1 class="logo-text">AYE AYE RECORDS</h1>
             <div class="tagline">// SONIC ARCHEOLOGY // 0/1 //</div>
         </header>
+
+        <section id="manifesto-sec" class="overlay-section">
+            <button class="close-btn" onclick="closeAllSections()">[ CLOSE_X ]</button>
+            <div class="content-box">
+                <h2>[ MANIFESTO ]</h2>
+                <p class="intro">Milan based Lab & Independent Digital Label.</p>
+                <p>We are a playground for sonic evolution. Our mission is simple: to capture the universal frequency of inclusion through the only language that matters: Music.</p>
+                <p>We don't just sign artists; we seek emotional affinity and intellectual sincerity. We believe in the "human groove" and in the honest expression of the soul. Whether it’s a beat, a bassline, or a silence, if it’s sincere, it’s Aye Aye.</p>
+                <p class="motto">Creative sincerity. Artistic evolution. Digital heart.<br>Aye Aye Records. Born to Beat.</p>
+            </div>
+        </section>
+
+        <section id="releases-sec" class="overlay-section">
+            <button class="close-btn" onclick="closeAllSections()">[ CLOSE_X ]</button>
+            <div class="content-box">
+                <h2>[ LOG_RELEASES ]</h2>
+                
+                <div class="upcoming-release">
+                    <div class="signal-tag">SIGNAL_LOCKED: UPCOMING</div>
+                    <div class="release-item highlight">
+                        <span class="date">[ 09.2026 ]</span>
+                        <h3>FUTURE_TRANSMISSION</h3>
+                        <p class="desc">Intercettazione di frequenze asimmetriche in fase di mastering.</p>
+                    </div>
+                </div>
+
+                <div class="release-list">
+                    <div class="release-item">
+                        <span class="date">[ 05.2026 ]</span>
+                        <h3>GILLESTEP - DISCOLOW</h3>
+                        <p class="desc">Archeologia Dubstep. Il primo segnale del vulcano.</p>
+                    </div>
+                    <div class="release-item">
+                        <span class="date">[ 03.2026 ]</span>
+                        <h3>VOID_SCANNER</h3>
+                        <p class="desc">Esplorazione di silenzi digitali e riverberi industriali.</p>
+                    </div>
+                    <div class="release-item">
+                        <span class="date">[ 01.2026 ]</span>
+                        <h3>BINARY_ROOTS</h3>
+                        <p class="desc">Deep techno meets ancestral rhythms.</p>
+                    </div>
+                    <div class="release-item">
+                        <span class="date">[ 11.2025 ]</span>
+                        <h3>SIGNAL_01</h3>
+                        <p class="desc">L'inizio della trasmissione. Fondamenta sonore.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="connect-sec" class="overlay-section">
+            <button class="close-btn" onclick="closeAllSections()">[ CLOSE_X ]</button>
+            <div class="content-box">
+                <h2>[ CONNECT_NODES ]</h2>
+                <div class="contact-grid">
+                    <div class="node">
+                        <span>CORE_DIRECTOR:</span>
+                        <p>John Doe // info@ayeayerecords.com</p>
+                    </div>
+                    <div class="node">
+                        <span>PR_SIGNAL:</span>
+                        <p>Jane Smith // pr@ayeayerecords.com</p>
+                    </div>
+                    <div class="node">
+                        <span>TECH_UPLINK:</span>
+                        <p>Alan Turing // tech@ayeayerecords.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <div class="volcano-sound-container right-axis">
@@ -33,9 +104,9 @@
     <footer>
         <div class="footer-block left">
             <nav class="command-menu">
-                <a href="#releases" class="cmd-link">[ LOG_RELEASES ]</a>
-                <a href="#manifesto" class="cmd-link">[ MANIFESTO ]</a>
-                <a href="#connect" class="cmd-link">[ CONNECT ]</a>
+                <a href="javascript:void(0)" onclick="openSection('releases-sec')" class="cmd-link">[ LOG_RELEASES ]</a>
+                <a href="javascript:void(0)" onclick="openSection('manifesto-sec')" class="cmd-link">[ MANIFESTO ]</a>
+                <a href="javascript:void(0)" onclick="openSection('connect-sec')" class="cmd-link">[ CONNECT ]</a>
             </nav>
             <a href="mailto:info@ayeayerecords.com" target="_blank" class="footer-link">
                 <i class="fa-regular fa-envelope"></i>
@@ -60,6 +131,15 @@
         let btn = document.getElementById('beat-btn');
         let trackLog = document.getElementById('track-log');
         let isPlaying = false;
+
+        function openSection(id) {
+            closeAllSections();
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeAllSections() {
+            document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active'));
+        }
 
         window.audioAmp = 0;
         let audioCtx, analyser, source, dataArray;
@@ -104,6 +184,6 @@
             isPlaying = !isPlaying;
         }
     </script>
-    <script src="sketch.js?v=5.0"></script>
+    <script src="sketch.js"></script>
 </body>
 </html>
