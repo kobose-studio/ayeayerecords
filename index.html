@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=14.0">
+    <link rel="stylesheet" href="style.css?v=15.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -45,29 +45,64 @@
             <div class="overlay-close" onclick="closeAllSections()">[ CLOSE_X ]</div>
             <div class="content-box">
                 <h2>[ LOG_RELEASES ]</h2>
+                
                 <div class="upcoming-release">
                     <div class="signal-tag">SIGNAL_LOCKED: UPCOMING</div>
                     <div class="release-item highlight">
                         <span class="date">[ COMING_SOON ]</span>
                         <h3>DISCOLOW - JUNGLE-FU</h3>
-                        <p class="desc">New high-frequency sonic interdiction in development.</p>
+                        <p class="desc">High-frequency sonic interdiction. The next step in our evolution.</p>
                     </div>
                 </div>
+
                 <div class="release-list">
                     <div class="release-item">
                         <span class="date">[ 30.08.2023 ]</span>
                         <h3>CIRCOLO PROVARCI - 8B</h3>
+                        <p class="desc">Latest experimental release [Discolow remix]. A "motivational disco" mantra for exploration[cite: 8, 133].</p>
                         <a href="https://distrokid.com/hyperfollow/8b/circolo-provarci-discolow-remix-2" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
                     </div>
+
                     <div class="release-item">
                         <span class="date">[ 2023 ]</span>
-                        <h3>KOBOSE X MONOLITE - MONOLITE SOUNDSCAPES INTRO</h3>
+                        <h3>KOBOSE X MONOLITE - SOUNDSCAPES INTRO</h3>
+                        <p class="desc">Ambient textures and modular transmissions. Collaborative project.</p>
                         <a href="https://distrokid.com/hyperfollow/8b/monolite-soundscapes-intro" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
                     </div>
+
+                    <div class="release-item">
+                        <span class="date">[ 03.2023 ]</span>
+                        <h3>VOID_SCANNER</h3>
+                        <p class="desc">Encrypted signal. Deep space echoes and industrial resonance.</p>
+                        <span class="release-link inactive">-> [ SIGNAL_LOCKED ]</span>
+                    </div>
+
                     <div class="release-item">
                         <span class="date">[ 08.12.2022 ]</span>
-                        <h3>DONE THIS WAY - 8B</h3>
+                        <h3>DONE THIS WAY - 8B & THE AYE AYE DUBNTONE SYSTEM</h3>
+                        <p class="desc">Final component of the reggae roots dub project. An ode to Mother Earth and the seed of life[cite: 24, 177].</p>
                         <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/done-this-way" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
+                    </div>
+
+                    <div class="release-item">
+                        <span class="date">[ 08.10.2022 ]</span>
+                        <h3>BL4CKM4N - 8B & THE AYE AYE DUBNTONE SYSTEM</h3>
+                        <p class="desc">Deep rootsy mantra featuring driving melodies and soaring vocals[cite: 48, 202].</p>
+                        <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/bl4ckm4n" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
+                    </div>
+
+                    <div class="release-item">
+                        <span class="date">[ 08.08.2022 ]</span>
+                        <h3>100 SKIES - 8B & THE AYE AYE DUBNTONE SYSTEM</h3>
+                        <p class="desc">Milan-Jamaica snapshot. The first track featuring 8B on vocals[cite: 72, 73, 256].</p>
+                        <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/100-skies" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
+                    </div>
+
+                    <div class="release-item">
+                        <span class="date">[ 2022 ]</span>
+                        <h3>SWING ME FOR A WHILE - 8B</h3>
+                        <p class="desc">Homage to jazz culture. Digital bebop synthesis of loops and imagination[cite: 88, 91, 280].</p>
+                        <a href="https://distrokid.com/hyperfollow/8b/swing-me-for-a-while" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
                     </div>
                 </div>
             </div>
@@ -104,11 +139,9 @@
                     <span>Booking | info@ayeayerecords.com</span>
                 </a>
             </div>
-
             <div class="footer-center">
                 <img src="media/AyeAyeRecords_col.png" alt="Logo" class="footer-logo">
             </div>
-
             <div class="footer-corner-link right">
                 <a href="https://www.instagram.com/ayeayerecords" target="_blank" class="corner-link">
                     <span>Instagram</span>
@@ -116,16 +149,11 @@
                 </a>
             </div>
         </div>
-
         <div class="footer-bottom-legal">
             <div class="legal-left">© AYE AYE RECORDS 2026</div>
             <div class="legal-right">P.IVA 07078660961</div>
         </div>
     </footer>
-
-    <audio id="audio-track" loop preload="auto" crossorigin="anonymous">
-        <source src="media/Discolow_Gillestep.mp3" type="audio/mpeg">
-    </audio>
 
     <script>
         let audio = document.getElementById('audio-track');
