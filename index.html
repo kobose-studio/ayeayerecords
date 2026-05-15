@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=3.1">
+    <link rel="stylesheet" href="style.css?v=3.2">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -162,7 +162,7 @@
             </div>
             
             <div class="footer-center">
-                <a href="javascript:void(0)" onclick="closeAllSections()" title="Back to Home">
+                <a href="javascript:void(0)" onclick="closeAllSections()" title="Torna alla Home">
                     <img src="media/AyeAyeRecords_col.png" alt="Logo" class="f-logo">
                 </a>
             </div>
@@ -186,21 +186,16 @@
         let audio = document.getElementById('audio-track');
         let btn = document.getElementById('beat-btn');
         let trackLog = document.getElementById('track-log');
-        let beatContainer = document.getElementById('beat-container');
-        let mainFooter = document.getElementById('main-footer');
         let isPlaying = false;
         
+        /* Script ripulito: apriamo/chiudiamo le sezioni senza nascondere footer e beat */
         function openSection(id) { 
             closeAllSections(); 
             document.getElementById(id).classList.add('active'); 
-            beatContainer.style.display = 'none'; // Nasconde il Beat
-            mainFooter.style.display = 'none'; // Nasconde il Footer
         }
         
         function closeAllSections() { 
             document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); 
-            beatContainer.style.display = 'flex'; // Riappare il Beat
-            mainFooter.style.display = 'flex'; // Riappare il Footer
         }
 
         window.audioAmp = 0; let audioCtx, analyser, source, dataArray;
