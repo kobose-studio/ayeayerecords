@@ -1,7 +1,6 @@
-/* AYE AYE RECORDS - SIGNAL_COMMAND_CSS v3.1 
-   - FIX: Beat cliccabile (Z-index rialzato)
-   - FIX: Link Blue rimosso ovunque
-   - UPDATE: Pesi font footer e riga design
+/* AYE AYE RECORDS - SIGNAL_COMMAND_CSS v3.2 [STABLE FIX]
+   - FIX: Beat e Footer Z-index alzati a 500 (sempre visibili e cliccabili)
+   - FIX: Spazio in fondo agli overlay per non sovrapporsi al footer
 */
 
 :root { --neon-yellow: #f0ff00; --black: #050505; }
@@ -24,15 +23,17 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 .grid-link { font-size: 1.25rem; font-weight: 700; opacity: 0.4; transition: 0.3s; }
 .grid-link:hover { opacity: 1; transform: translateX(8px); }
 
-/* BEAT CONTROL: Z-index rialzato per click */
-.volcano-sound-container.right-axis { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 250 !important; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: auto !important; }
+/* BEAT CONTROL: Z-index a 500 per dominare tutto */
+.volcano-sound-container.right-axis { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 500 !important; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: auto !important; }
 .beat-btn { padding: 10px 25px; min-width: 170px; background: transparent !important; border: 1px solid var(--neon-yellow) !important; font-family: inherit; font-size: 0.9rem; transition: 0.3s; }
 .beat-btn.playing { animation: pulse 2s infinite; background: rgba(240, 255, 0, 0.1) !important; }
 @keyframes pulse { 50% { box-shadow: 0 0 15px var(--neon-yellow); } }
 .track-log { font-size: 0.55rem; opacity: 0.2; text-transform: uppercase; letter-spacing: 1px; }
 .track-log.active { opacity: 1; }
 
-.overlay-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 400; display: none; flex-direction: column; padding: 80px 20px; overflow-y: auto; pointer-events: auto !important; }
+/* OVERLAYS (z-index 400: sotto al Beat e al Footer) */
+/* Aggiunto padding-bottom: 120px per non sbattere contro il footer trasparente */
+.overlay-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 400; display: none; flex-direction: column; padding: 80px 20px 120px 20px; overflow-y: auto; pointer-events: auto !important; }
 .overlay-section.active { display: flex; animation: scanFade 0.4s ease-out; }
 @keyframes scanFade { from { opacity: 0; } to { opacity: 1; } }
 .content-box { max-width: 800px; margin: 0 auto; width: 100%; }
@@ -45,27 +46,30 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 .release-item:hover .release-img { filter: none; border-color: var(--neon-yellow); box-shadow: 0 0 15px rgba(240, 255, 0, 0.3); }
 .release-link { font-size: 0.75rem; font-weight: 700; }
 
-/* FOOTER Z-index abbassato */
-.grid-footer { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 250; padding: 10px 40px 10px 40px; display: flex; flex-direction: column; gap: 5px; background: transparent; }
+/* FOOTER Z-index a 500 (rimane visibile ed è cliccabile) */
+.grid-footer { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 500; padding: 10px 40px 10px 40px; display: flex; flex-direction: column; gap: 5px; background: transparent; pointer-events: none; }
 .footer-row-top { display: flex; justify-content: space-between; align-items: center; width: 100%; pointer-events: none; }
 .footer-corner-link.left { flex: 1; display: flex; justify-content: flex-start; pointer-events: auto !important; }
-.footer-center { flex: 1; display: flex; justify-content: center; pointer-events: auto !important; }
+.footer-center { flex: 1; display: flex; justify-content: center; pointer-events: auto !important; cursor: pointer; }
 .footer-corner-link.right { flex: 1; display: flex; justify-content: flex-end; pointer-events: auto !important; }
 .f-logo { height: 68px; width: auto; opacity: 0.8; transition: 0.3s; }
 .f-logo:hover { filter: drop-shadow(0 0 10px var(--neon-yellow)); transform: scale(1.05); }
 .f-link { font-size: 0.85rem; opacity: 0.5; display: flex; align-items: center; gap: 8px; }
 
-/* LEGAL ROW MODIFICATA */
-.footer-row-legal { display: flex; justify-content: space-between; font-size: 0.7rem; opacity: 0.4; letter-spacing: 1px; border-top: 1px solid rgba(240, 255, 0, 0.1); padding-top: 5px; }
+/* LEGAL ROW */
+.footer-row-legal { display: flex; justify-content: space-between; font-size: 0.7rem; opacity: 0.5; letter-spacing: 1px; border-top: 1px solid rgba(240, 255, 0, 0.1); padding-top: 5px; pointer-events: auto !important;}
 .legal-right-group { display: flex; gap: 30px; }
-.design-credit a { border-bottom: 1px solid rgba(240,255,0,0.4); }
+.design-credit a { border-bottom: 1px solid rgba(240,255,0,0.4); transition: 0.3s; }
+.design-credit a:hover { border-bottom-color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow); }
 
 @media (max-width: 768px) {
     .terminal-header { position: relative; top: 20px; left: 20px; margin-bottom: 30px; }
     .grid-nav { position: relative; bottom: auto; left: 20px; margin-bottom: 30px; }
-    .volcano-sound-container.right-axis { position: fixed; top: 60%; left: 50%; right: auto; transform: translate(-50%, -50%); align-items: center; width: auto; }
-    .grid-footer { position: relative; padding: 20px; }
-    .footer-row-top { flex-direction: column; align-items: center; gap: 25px; }
+    /* BEAT E FOOTER SEMPRE SOPRA TUTTO SU MOBILE */
+    .volcano-sound-container.right-axis { position: fixed; top: 60%; left: 50%; right: auto; transform: translate(-50%, -50%); align-items: center; width: auto; z-index: 500 !important; }
+    .grid-footer { position: fixed; bottom: 0; background: rgba(5, 5, 5, 0.95); padding: 15px 20px; }
+    .footer-row-top { flex-direction: column; align-items: center; gap: 15px; }
     .footer-row-legal { flex-direction: column; align-items: center; gap: 5px; text-align: center; }
     .legal-right-group { flex-direction: column; gap: 5px; }
+    .overlay-section { padding-bottom: 180px; } /* Più spazio in basso per il footer mobile fisso */
 }
