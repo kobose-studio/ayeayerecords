@@ -1,8 +1,7 @@
-/* AYE AYE RECORDS - SIGNAL_COMMAND_CSS 
-   - FIX: Main UI Z-index (Ripristina visibilità sinistra)
-   - FIX: Sfondo Footer Trasparente
-   - UPDATE: Logo Ingrandito del 50%
-   - UPDATE: Footer perfettamente centrato e linkato
+/* AYE AYE RECORDS - SIGNAL_COMMAND_CSS v3.0 [STABLE]
+   - FIX: Layer Z-Index (Overlay sopra tasti e footer)
+   - FIX: Footer 3 blocchi centrato perfetto
+   - UPDATE: Design credit styling
 */
 
 :root {
@@ -11,94 +10,64 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--black); color: var(--neon-yellow); font-family: 'Space Mono', monospace; min-height: 100vh; overflow-x: hidden; }
+body { background-color: var(--black); color: var(--neon-yellow); font-family: 'Space Mono', monospace; height: 100vh; overflow: hidden; }
 
-/* SCANLINES E SFONDO */
+/* SFONDO */
 #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 body::after { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%); background-size: 100% 4px; z-index: 2; pointer-events: none; }
 
-/* SBLOCCO CLICK GLOBALE */
-a { color: var(--neon-yellow) !important; text-decoration: none !important; pointer-events: auto; }
-a:hover { text-shadow: 0 0 10px var(--neon-yellow) !important; }
-button, .overlay-close { pointer-events: auto; cursor: pointer; }
-
-/* FIX VISIBILITÀ: main-ui ora sta sopra le scanlines */
+/* SBLOCCO CLICK */
+a, button, .grid-link, .beat-btn { pointer-events: auto !important; cursor: pointer !important; }
 .main-ui { position: relative; z-index: 10; height: 100%; pointer-events: none; }
 
 /* HEADER */
-.terminal-header { position: fixed; top: 30px; left: 40px; z-index: 60; pointer-events: auto; cursor: pointer; }
-.logo-text { font-size: clamp(1.8rem, 8vw, 4.2rem); border-bottom: 2px solid var(--neon-yellow); display: inline-block; padding-bottom: 5px; letter-spacing: -2px; }
-.tagline { font-size: 0.8rem; opacity: 0.7; letter-spacing: 2px; margin-top: 5px; }
+.terminal-header { position: fixed; top: 30px; left: 40px; z-index: 60; pointer-events: auto !important; }
+.logo-text { font-size: clamp(1.8rem, 8vw, 4rem); border-bottom: 2px solid var(--neon-yellow); display: inline-block; padding-bottom: 5px; letter-spacing: -2px; }
+.tagline { font-size: 0.8rem; opacity: 0.7; letter-spacing: 2px; }
 
-/* NAVIGAZIONE */
-.grid-nav { position: fixed; bottom: 140px; left: 40px; display: flex; flex-direction: column; gap: 10px; z-index: 100; pointer-events: auto; }
-.grid-link { text-decoration: none; color: var(--neon-yellow); font-size: 1.25rem; font-weight: 700; opacity: 0.5; transition: 0.3s; }
+/* NAV GRID */
+.grid-nav { position: fixed; bottom: 130px; left: 40px; display: flex; flex-direction: column; gap: 10px; z-index: 100; pointer-events: auto !important; }
+.grid-link { text-decoration: none; color: var(--neon-yellow); font-size: 1.2rem; font-weight: 700; opacity: 0.4; transition: 0.3s; }
 .grid-link:hover { opacity: 1; transform: translateX(8px); text-shadow: 0 0 10px var(--neon-yellow); }
 
-/* BEAT CONTROL */
-.volcano-sound-container.right-axis { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 150; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: auto; }
-.beat-btn { padding: 10px 25px; min-width: 170px; background: transparent !important; border: 1px solid var(--neon-yellow) !important; color: var(--neon-yellow) !important; font-family: inherit; font-size: 0.9rem; cursor: pointer; transition: 0.3s; }
+/* BEAT CONTROL (z-index 250: scompare sotto gli overlay che sono a 400) */
+.volcano-sound-container.right-axis { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 250 !important; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: auto !important; }
+.beat-btn { padding: 10px 25px; min-width: 170px; background: transparent !important; border: 1px solid var(--neon-yellow) !important; color: var(--neon-yellow) !important; font-family: inherit; font-size: 0.9rem; transition: 0.3s; }
 .beat-btn.playing { animation: pulse 2s infinite; background: rgba(240, 255, 0, 0.1) !important; }
 @keyframes pulse { 50% { box-shadow: 0 0 15px var(--neon-yellow); } }
-.track-log { font-size: 0.55rem; opacity: 0.2; transition: 0.8s; text-transform: uppercase; letter-spacing: 1px; }
-.track-log.active { opacity: 1; }
 
-/* OVERLAYS E RELEASES (Fosfori Gialli attivi) */
-.overlay-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 300; display: none; flex-direction: column; padding: 80px 20px; overflow-y: auto; pointer-events: auto; }
+/* OVERLAYS */
+.overlay-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 400; display: none; flex-direction: column; padding: 80px 20px; overflow-y: auto; pointer-events: auto !important; }
 .overlay-section.active { display: flex; animation: scanFade 0.4s ease-out; }
 @keyframes scanFade { from { opacity: 0; } to { opacity: 1; } }
-
 .content-box { max-width: 800px; margin: 0 auto; width: 100%; }
-.content-box h2 { font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid var(--neon-yellow); padding-bottom: 10px; }
-.overlay-close { position: fixed; top: 20px; right: 20px; color: var(--neon-yellow); font-size: 0.8rem; cursor: pointer; border: 1px solid var(--neon-yellow); padding: 5px 12px; z-index: 310; background: var(--black); }
+.overlay-close { position: fixed; top: 20px; right: 20px; color: var(--neon-yellow); font-size: 0.8rem; border: 1px solid var(--neon-yellow); padding: 5px 12px; background: var(--black); z-index: 500; }
 
+/* RELEASES */
 .flex-item { display: flex; align-items: center; gap: 25px; }
-.release-item { border-left: 1px solid rgba(240, 255, 0, 0.3); padding-left: 20px; margin-bottom: 40px; transition: 0.3s; }
-.release-item.highlight { background: rgba(240, 255, 0, 0.08); padding: 15px; border-left: 2px solid var(--neon-yellow); }
-.img-link { display: block; line-height: 0; background: var(--black); }
-.release-img { width: 140px; height: 140px; border: 1px solid rgba(240, 255, 0, 0.3); object-fit: cover; filter: sepia(100%) hue-rotate(15deg) saturate(500%) brightness(0.7) contrast(1.2); transition: 0.5s ease; }
-.release-item:hover .release-img { filter: none; border-color: var(--neon-yellow); box-shadow: 0 0 20px rgba(240, 255, 0, 0.4); transform: scale(1.02); }
-.release-img.static { filter: none; border-color: var(--neon-yellow); }
-.release-info { flex: 1; }
-.release-info h3 { font-size: 1.2rem; color: var(--neon-yellow); margin-bottom: 5px; }
-.release-info .desc { font-size: 0.85rem; opacity: 0.7; margin-bottom: 10px; line-height: 1.4; }
-.release-link { font-size: 0.75rem; font-weight: 700; margin-top: 5px; display: inline-block; transition: 0.3s; }
+.release-item { border-left: 1px solid rgba(240, 255, 0, 0.3); padding-left: 20px; margin-bottom: 40px; }
+.release-img { width: 130px; height: 130px; border: 1px solid rgba(240, 255, 0, 0.3); object-fit: cover; filter: sepia(100%) hue-rotate(15deg) saturate(500%) brightness(0.6) contrast(1.2); transition: 0.5s ease; }
+.release-item:hover .release-img { filter: none; border-color: var(--neon-yellow); box-shadow: 0 0 15px rgba(240, 255, 0, 0.3); }
+.release-link { font-size: 0.75rem; font-weight: 700; color: var(--neon-yellow) !important; }
 
-/* FOOTER TRASPARENTE SULLA GRIGLIA (Centrato perfetto) */
-.grid-footer {
-    position: fixed; bottom: 0; left: 0; width: 100%;
-    z-index: 50; padding: 10px 40px 10px 40px;
-    display: flex; flex-direction: column; gap: 5px;
-    background: transparent; 
-}
-.footer-row-top { 
-    display: flex; justify-content: space-between; align-items: center; 
-    width: 100%; pointer-events: none; 
-}
-
-/* Divisione in 3 blocchi uguali per centrare il logo */
+/* FOOTER TRASPARENTE (z-index 250: scompare sotto gli overlay) */
+.grid-footer { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 250; padding: 10px 40px 10px 40px; display: flex; flex-direction: column; gap: 5px; background: transparent; }
+.footer-row-top { display: flex; justify-content: space-between; align-items: center; width: 100%; pointer-events: none; }
 .footer-corner-link.left { flex: 1; display: flex; justify-content: flex-start; pointer-events: auto !important; }
 .footer-center { flex: 1; display: flex; justify-content: center; pointer-events: auto !important; }
 .footer-corner-link.right { flex: 1; display: flex; justify-content: flex-end; pointer-events: auto !important; }
-
 .f-logo { height: 68px; width: auto; opacity: 0.8; transition: 0.3s; }
 .f-logo:hover { filter: drop-shadow(0 0 10px var(--neon-yellow)); transform: scale(1.05); }
-
 .f-link { font-size: 0.85rem; color: var(--neon-yellow); opacity: 0.5; display: flex; align-items: center; gap: 8px; }
-.footer-row-legal { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--neon-yellow); opacity: 0.25; letter-spacing: 1px; border-top: 1px solid rgba(240, 255, 0, 0.05); padding-top: 5px; }
+.footer-row-legal { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--neon-yellow); opacity: 0.25; border-top: 1px solid rgba(240, 255, 0, 0.05); padding-top: 5px; }
+.design-credit a { color: var(--neon-yellow); text-decoration: none; border-bottom: 1px solid rgba(240,255,0,0.4); }
 
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 @media (max-width: 768px) {
-    .terminal-header { position: relative; top: 20px; left: 20px; margin-bottom: 40px; }
-    .grid-nav { position: relative; bottom: auto; left: 20px; margin-bottom: 40px; }
-    .volcano-sound-container.right-axis { position: relative; right: auto; top: auto; transform: none; align-items: center; width: 100%; margin: 20px 0 60px 0; }
-    
-    /* Footer Mobile: Impila gli elementi del nuovo footer */
-    .grid-footer { position: relative; padding: 30px 20px; }
+    .terminal-header { position: relative; top: 20px; left: 20px; margin-bottom: 30px; }
+    .grid-nav { position: relative; bottom: auto; left: 20px; margin-bottom: 30px; }
+    .volcano-sound-container.right-axis { position: fixed; top: 60%; left: 50%; right: auto; transform: translate(-50%, -50%); align-items: center; width: auto; }
+    .grid-footer { position: relative; padding: 20px; }
     .footer-row-top { flex-direction: column; align-items: center; gap: 25px; }
-    .footer-corner-link.left, .footer-center, .footer-corner-link.right { justify-content: center; }
-    .footer-row-legal { flex-direction: column; align-items: center; gap: 8px; text-align: center; }
-    
-    .flex-item { flex-direction: column; gap: 15px; align-items: flex-start; }
-    .release-img { width: 100%; height: auto; max-width: 200px; }
+    .footer-row-legal { flex-direction: column; align-items: center; gap: 5px; text-align: center; }
 }
