@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=3.2">
+    <link rel="stylesheet" href="style.css?v=3.4">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -148,12 +148,12 @@
         </section>
     </main>
 
-    <div class="volcano-sound-container right-axis" id="beat-container">
+    <div class="volcano-sound-container right-axis">
         <div id="track-log" class="track-log">LOG: GILLESTEP - DISCOLOW [2026]</div>
         <button id="beat-btn" class="beat-btn" onclick="toggleBeat()">[ BEAT: OFF ]</button>
     </div>
 
-    <footer class="grid-footer" id="main-footer">
+    <footer class="grid-footer">
         <div class="footer-row-top">
             <div class="footer-corner-link left">
                 <a href="mailto:info@ayeayerecords.com" class="f-link">
@@ -162,7 +162,7 @@
             </div>
             
             <div class="footer-center">
-                <a href="javascript:void(0)" onclick="closeAllSections()" title="Torna alla Home">
+                <a href="javascript:void(0)" onclick="closeAllSections()" title="Back to Home">
                     <img src="media/AyeAyeRecords_col.png" alt="Logo" class="f-logo">
                 </a>
             </div>
@@ -182,13 +182,15 @@
         </div>
     </footer>
 
+    <audio id="audio-track" loop preload="auto" crossorigin="anonymous">
+        <source src="media/Discolow_Gillestep.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        let audio = document.getElementById('audio-track');
-        let btn = document.getElementById('beat-btn');
-        let trackLog = document.getElementById('track-log');
         let isPlaying = false;
+        window.audioAmp = 0; 
+        let audioCtx, analyser, source, dataArray;
         
-        /* Script ripulito: apriamo/chiudiamo le sezioni senza nascondere footer e beat */
         function openSection(id) { 
             closeAllSections(); 
             document.getElementById(id).classList.add('active'); 
@@ -198,24 +200,57 @@
             document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); 
         }
 
-        window.audioAmp = 0; let audioCtx, analyser, source, dataArray;
-        function initAudio() {
+        function initAudio(audioElement) {
             if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioCtx.createAnalyser(); analyser.fftSize = 256;
-                source = audioCtx.createMediaElementSource(audio); source.connect(analyser); analyser.connect(audioCtx.destination);
+                let AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+                analyser = audioCtx.createAnalyser(); 
+                analyser.fftSize = 256;
+                source = audioCtx.createMediaElementSource(audioElement); 
+                source.connect(analyser); 
+                analyser.connect(audioCtx.destination);
                 dataArray = new Uint8Array(analyser.frequencyBinCount);
-                function update() { requestAnimationFrame(update); if (isPlaying) { analyser.getByteFrequencyData(dataArray); let sum = 0; for(let i=0; i<dataArray.length; i++) sum += dataArray[i]; window.audioAmp = sum / dataArray.length; } else { window.audioAmp = 0; } }
+                
+                function update() { 
+                    requestAnimationFrame(update); 
+                    if (isPlaying) { 
+                        analyser.getByteFrequencyData(dataArray); 
+                        let sum = 0; 
+                        for(let i=0; i<dataArray.length; i++) sum += dataArray[i]; 
+                        window.audioAmp = sum / dataArray.length; 
+                    } else { 
+                        window.audioAmp = 0; 
+                    } 
+                }
                 update();
             }
         }
-        function toggleBeat() { initAudio(); if (audioCtx.state === 'suspended') audioCtx.resume();
-            if (isPlaying) { audio.pause(); btn.innerText = "[ BEAT: OFF ]"; btn.classList.remove('playing'); trackLog.classList.remove('active'); } 
-            else { audio.play(); btn.innerText = "[ BEAT: ON ]"; btn.classList.add('playing'); trackLog.classList.add('active'); }
+
+        function toggleBeat() { 
+            // Cerca gli elementi dinamicamente quando clicchi
+            let audio = document.getElementById('audio-track');
+            let btn = document.getElementById('beat-btn');
+            let trackLog = document.getElementById('track-log');
+            
+            if(!audio) return; // Sicurezza extra
+            
+            initAudio(audio); 
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            if (isPlaying) { 
+                audio.pause(); 
+                btn.innerText = "[ BEAT: OFF ]"; 
+                btn.classList.remove('playing'); 
+                trackLog.classList.remove('active'); 
+            } else { 
+                audio.play().catch(e => console.log("Segnale bloccato:", e)); 
+                btn.innerText = "[ BEAT: ON ]"; 
+                btn.classList.add('playing'); 
+                trackLog.classList.add('active'); 
+            }
             isPlaying = !isPlaying;
         }
     </script>
-    <audio id="audio-track" loop preload="auto" crossorigin="anonymous"><source src="media/Discolow_Gillestep.mp3" type="audio/mpeg"></audio>
     <script src="sketch.js"></script>
 </body>
 </html>
