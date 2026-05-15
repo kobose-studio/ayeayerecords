@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="style.css?v=3.1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -148,12 +148,12 @@
         </section>
     </main>
 
-    <div class="volcano-sound-container right-axis">
+    <div class="volcano-sound-container right-axis" id="beat-container">
         <div id="track-log" class="track-log">LOG: GILLESTEP - DISCOLOW [2026]</div>
         <button id="beat-btn" class="beat-btn" onclick="toggleBeat()">[ BEAT: OFF ]</button>
     </div>
 
-    <footer class="grid-footer">
+    <footer class="grid-footer" id="main-footer">
         <div class="footer-row-top">
             <div class="footer-corner-link left">
                 <a href="mailto:info@ayeayerecords.com" class="f-link">
@@ -175,8 +175,10 @@
         </div>
         <div class="footer-row-legal">
             <span>© AYE AYE RECORDS 2026</span>
-            <span class="design-credit">DESIGN • <a href="https://kobose.myportfolio.com/" target="_blank">KOBOSE</a></span>
-            <span>P.IVA 07078660961</span>
+            <div class="legal-right-group">
+                <span class="design-credit">DESIGN • <a href="https://kobose.myportfolio.com/" target="_blank">KOBOSE</a></span>
+                <span>P.IVA 07078660961</span>
+            </div>
         </div>
     </footer>
 
@@ -184,9 +186,23 @@
         let audio = document.getElementById('audio-track');
         let btn = document.getElementById('beat-btn');
         let trackLog = document.getElementById('track-log');
+        let beatContainer = document.getElementById('beat-container');
+        let mainFooter = document.getElementById('main-footer');
         let isPlaying = false;
-        function openSection(id) { closeAllSections(); document.getElementById(id).classList.add('active'); }
-        function closeAllSections() { document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); }
+        
+        function openSection(id) { 
+            closeAllSections(); 
+            document.getElementById(id).classList.add('active'); 
+            beatContainer.style.display = 'none'; // Nasconde il Beat
+            mainFooter.style.display = 'none'; // Nasconde il Footer
+        }
+        
+        function closeAllSections() { 
+            document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); 
+            beatContainer.style.display = 'flex'; // Riappare il Beat
+            mainFooter.style.display = 'flex'; // Riappare il Footer
+        }
+
         window.audioAmp = 0; let audioCtx, analyser, source, dataArray;
         function initAudio() {
             if (!audioCtx) {
