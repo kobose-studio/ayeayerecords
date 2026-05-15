@@ -1,3 +1,4 @@
+/* AYE AYE RECORDS - RADAR_ENGINE_JS v3.0 [STABLE] */
 let pulses = [];
 let gridScl = 50;
 
@@ -7,41 +8,20 @@ function setup() {
 }
 
 function draw() {
-    background(5, 50); // Scia per l'effetto radar
-    
+    background(5, 50); 
     let amp = window.audioAmp || 0;
-
-    // Griglia Radar
     stroke(232, 255, 0, 30);
     for(let x = 0; x < width; x += gridScl) line(x, 0, x, height);
     for(let y = 0; y < height; y += gridScl) line(0, y, width, y);
-
-    // Se l'audio suona, emetti impulsi automatici al ritmo
-    if (amp > 50 && frameCount % 10 === 0) {
-        pulses.push(new Pulse(random(width), random(height), amp/2));
-    }
-
-    // Interazione mouse
+    if (amp > 50 && frameCount % 10 === 0) { pulses.push(new Pulse(random(width), random(height), amp/2)); }
     if (mouseIsPressed) pulses.push(new Pulse(mouseX, mouseY, 20));
-
-    for (let i = pulses.length - 1; i >= 0; i--) {
-        pulses[i].update();
-        pulses[i].show();
-        if (pulses[i].dead()) pulses.splice(i, 1);
-    }
+    for (let i = pulses.length - 1; i >= 0; i--) { pulses[i].update(); pulses[i].show(); if (pulses[i].dead()) pulses.splice(i, 1); }
 }
 
 class Pulse {
-    constructor(x, y, startR) {
-        this.x = x; this.y = y; this.r = startR; this.a = 255;
-    }
+    constructor(x, y, startR) { this.x = x; this.y = y; this.r = startR; this.a = 255; }
     update() { this.r += 5; this.a -= 4; }
-    show() {
-        noFill();
-        stroke(232, 255, 0, this.a);
-        ellipse(this.x, this.y, this.r);
-    }
+    show() { noFill(); stroke(232, 255, 0, this.a); ellipse(this.x, this.y, this.r); }
     dead() { return this.a <= 0; }
 }
-
 function windowResized() { resizeCanvas(windowWidth, windowHeight); }
