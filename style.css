@@ -1,6 +1,6 @@
-/* AYE AYE RECORDS - SIGNAL_COMMAND_CSS v3.2 [STABLE FIX]
-   - FIX: Beat e Footer Z-index alzati a 500 (sempre visibili e cliccabili)
-   - FIX: Spazio in fondo agli overlay per non sovrapporsi al footer
+/* AYE AYE RECORDS - SIGNAL_COMMAND_CSS v3.3 [STABLE FIX]
+   - FIX: Beat button colore ripristinato (era nero)
+   - FIX: Beat button click forzato (z-index: 9999)
 */
 
 :root { --neon-yellow: #f0ff00; --black: #050505; }
@@ -23,16 +23,29 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 .grid-link { font-size: 1.25rem; font-weight: 700; opacity: 0.4; transition: 0.3s; }
 .grid-link:hover { opacity: 1; transform: translateX(8px); }
 
-/* BEAT CONTROL: Z-index a 500 per dominare tutto */
-.volcano-sound-container.right-axis { position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 500 !important; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: auto !important; }
-.beat-btn { padding: 10px 25px; min-width: 170px; background: transparent !important; border: 1px solid var(--neon-yellow) !important; font-family: inherit; font-size: 0.9rem; transition: 0.3s; }
+/* =========================================
+   BEAT CONTROL: LA FORZATURA DEFINITIVA
+   ========================================= */
+.volcano-sound-container.right-axis { 
+    position: fixed; right: 40px; top: 50%; transform: translateY(-50%); 
+    z-index: 9999 !important; /* Priorità assoluta su TUTTO */
+    display: flex; flex-direction: column; align-items: flex-end; gap: 8px; 
+    pointer-events: auto !important; 
+}
+.beat-btn { 
+    padding: 10px 25px; min-width: 170px; 
+    background: transparent !important; 
+    border: 1px solid var(--neon-yellow) !important; 
+    color: var(--neon-yellow) !important; /* Colore ripristinato */
+    font-family: inherit; font-size: 0.9rem; transition: 0.3s; 
+    cursor: pointer !important; pointer-events: auto !important;
+}
 .beat-btn.playing { animation: pulse 2s infinite; background: rgba(240, 255, 0, 0.1) !important; }
 @keyframes pulse { 50% { box-shadow: 0 0 15px var(--neon-yellow); } }
 .track-log { font-size: 0.55rem; opacity: 0.2; text-transform: uppercase; letter-spacing: 1px; }
 .track-log.active { opacity: 1; }
 
 /* OVERLAYS (z-index 400: sotto al Beat e al Footer) */
-/* Aggiunto padding-bottom: 120px per non sbattere contro il footer trasparente */
 .overlay-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 400; display: none; flex-direction: column; padding: 80px 20px 120px 20px; overflow-y: auto; pointer-events: auto !important; }
 .overlay-section.active { display: flex; animation: scanFade 0.4s ease-out; }
 @keyframes scanFade { from { opacity: 0; } to { opacity: 1; } }
@@ -46,7 +59,7 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 .release-item:hover .release-img { filter: none; border-color: var(--neon-yellow); box-shadow: 0 0 15px rgba(240, 255, 0, 0.3); }
 .release-link { font-size: 0.75rem; font-weight: 700; }
 
-/* FOOTER Z-index a 500 (rimane visibile ed è cliccabile) */
+/* FOOTER Z-index a 500 */
 .grid-footer { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 500; padding: 10px 40px 10px 40px; display: flex; flex-direction: column; gap: 5px; background: transparent; pointer-events: none; }
 .footer-row-top { display: flex; justify-content: space-between; align-items: center; width: 100%; pointer-events: none; }
 .footer-corner-link.left { flex: 1; display: flex; justify-content: flex-start; pointer-events: auto !important; }
@@ -65,11 +78,13 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 @media (max-width: 768px) {
     .terminal-header { position: relative; top: 20px; left: 20px; margin-bottom: 30px; }
     .grid-nav { position: relative; bottom: auto; left: 20px; margin-bottom: 30px; }
-    /* BEAT E FOOTER SEMPRE SOPRA TUTTO SU MOBILE */
-    .volcano-sound-container.right-axis { position: fixed; top: 60%; left: 50%; right: auto; transform: translate(-50%, -50%); align-items: center; width: auto; z-index: 500 !important; }
+    
+    /* BEAT SEMPRE SOPRA TUTTO SU MOBILE */
+    .volcano-sound-container.right-axis { position: fixed; top: 60%; left: 50%; right: auto; transform: translate(-50%, -50%); align-items: center; width: auto; z-index: 9999 !important; }
+    
     .grid-footer { position: fixed; bottom: 0; background: rgba(5, 5, 5, 0.95); padding: 15px 20px; }
     .footer-row-top { flex-direction: column; align-items: center; gap: 15px; }
     .footer-row-legal { flex-direction: column; align-items: center; gap: 5px; text-align: center; }
     .legal-right-group { flex-direction: column; gap: 5px; }
-    .overlay-section { padding-bottom: 180px; } /* Più spazio in basso per il footer mobile fisso */
+    .overlay-section { padding-bottom: 180px; } 
 }
