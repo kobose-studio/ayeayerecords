@@ -2,6 +2,7 @@
    - FIX: Main UI Z-index (Ripristina visibilità sinistra)
    - FIX: Sfondo Footer Trasparente
    - UPDATE: Logo Ingrandito del 50%
+   - UPDATE: Footer perfettamente centrato e linkato
 */
 
 :root {
@@ -24,7 +25,7 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 /* FIX VISIBILITÀ: main-ui ora sta sopra le scanlines */
 .main-ui { position: relative; z-index: 10; height: 100%; pointer-events: none; }
 
-/* HEADER (Torna visibile) */
+/* HEADER */
 .terminal-header { position: fixed; top: 30px; left: 40px; z-index: 60; pointer-events: auto; cursor: pointer; }
 .logo-text { font-size: clamp(1.8rem, 8vw, 4.2rem); border-bottom: 2px solid var(--neon-yellow); display: inline-block; padding-bottom: 5px; letter-spacing: -2px; }
 .tagline { font-size: 0.8rem; opacity: 0.7; letter-spacing: 2px; margin-top: 5px; }
@@ -45,6 +46,8 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 /* OVERLAYS E RELEASES (Fosfori Gialli attivi) */
 .overlay-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 300; display: none; flex-direction: column; padding: 80px 20px; overflow-y: auto; pointer-events: auto; }
 .overlay-section.active { display: flex; animation: scanFade 0.4s ease-out; }
+@keyframes scanFade { from { opacity: 0; } to { opacity: 1; } }
+
 .content-box { max-width: 800px; margin: 0 auto; width: 100%; }
 .content-box h2 { font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid var(--neon-yellow); padding-bottom: 10px; }
 .overlay-close { position: fixed; top: 20px; right: 20px; color: var(--neon-yellow); font-size: 0.8rem; cursor: pointer; border: 1px solid var(--neon-yellow); padding: 5px 12px; z-index: 310; background: var(--black); }
@@ -61,22 +64,41 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 .release-info .desc { font-size: 0.85rem; opacity: 0.7; margin-bottom: 10px; line-height: 1.4; }
 .release-link { font-size: 0.75rem; font-weight: 700; margin-top: 5px; display: inline-block; transition: 0.3s; }
 
-/* FOOTER TRASPARENTE CON LOGO +50% */
-footer { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 50; padding: 10px 40px 10px 40px; display: flex; flex-direction: column; gap: 5px; background: transparent; pointer-events: none; }
-.footer-top { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; }
-.footer-top > div { pointer-events: auto; }
-/* LOGO INGRANDITO DA 45px a 68px */
-.footer-logo { height: 68px; width: auto; opacity: 0.8; }
-.corner-link { color: var(--neon-yellow); text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; opacity: 0.6; }
-.footer-bottom-legal { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--neon-yellow); opacity: 0.3; letter-spacing: 1px; padding-top: 5px; border-top: 1px solid rgba(240, 255, 0, 0.1); }
+/* FOOTER TRASPARENTE SULLA GRIGLIA (Centrato perfetto) */
+.grid-footer {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    z-index: 50; padding: 10px 40px 10px 40px;
+    display: flex; flex-direction: column; gap: 5px;
+    background: transparent; 
+}
+.footer-row-top { 
+    display: flex; justify-content: space-between; align-items: center; 
+    width: 100%; pointer-events: none; 
+}
 
+/* Divisione in 3 blocchi uguali per centrare il logo */
+.footer-corner-link.left { flex: 1; display: flex; justify-content: flex-start; pointer-events: auto !important; }
+.footer-center { flex: 1; display: flex; justify-content: center; pointer-events: auto !important; }
+.footer-corner-link.right { flex: 1; display: flex; justify-content: flex-end; pointer-events: auto !important; }
+
+.f-logo { height: 68px; width: auto; opacity: 0.8; transition: 0.3s; }
+.f-logo:hover { filter: drop-shadow(0 0 10px var(--neon-yellow)); transform: scale(1.05); }
+
+.f-link { font-size: 0.85rem; color: var(--neon-yellow); opacity: 0.5; display: flex; align-items: center; gap: 8px; }
+.footer-row-legal { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--neon-yellow); opacity: 0.25; letter-spacing: 1px; border-top: 1px solid rgba(240, 255, 0, 0.05); padding-top: 5px; }
+
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
     .terminal-header { position: relative; top: 20px; left: 20px; margin-bottom: 40px; }
     .grid-nav { position: relative; bottom: auto; left: 20px; margin-bottom: 40px; }
     .volcano-sound-container.right-axis { position: relative; right: auto; top: auto; transform: none; align-items: center; width: 100%; margin: 20px 0 60px 0; }
-    footer { position: relative; padding: 30px 20px; }
-    .footer-top { flex-direction: column; align-items: center; gap: 25px; }
-    .footer-bottom-legal { flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+    
+    /* Footer Mobile: Impila gli elementi del nuovo footer */
+    .grid-footer { position: relative; padding: 30px 20px; }
+    .footer-row-top { flex-direction: column; align-items: center; gap: 25px; }
+    .footer-corner-link.left, .footer-center, .footer-corner-link.right { justify-content: center; }
+    .footer-row-legal { flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+    
     .flex-item { flex-direction: column; gap: 15px; align-items: flex-start; }
     .release-img { width: 100%; height: auto; max-width: 200px; }
 }
