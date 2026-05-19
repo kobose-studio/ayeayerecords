@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=3.4">
+    <link rel="stylesheet" href="style.css?v=4.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -24,6 +24,7 @@
             <a href="javascript:void(0)" onclick="openSection('releases-sec')" class="grid-link">[ LOG_RELEASES ]</a>
             <a href="javascript:void(0)" onclick="openSection('manifesto-sec')" class="grid-link">[ PROTOCOL ]</a>
             <a href="javascript:void(0)" onclick="openSection('connect-sec')" class="grid-link">[ CONNECT ]</a>
+            <a href="javascript:void(0)" onclick="openSection('volcano-sec')" class="grid-link">[ SONIC_VOLCANO ]</a>
         </nav>
 
         <section id="releases-sec" class="overlay-section">
@@ -37,6 +38,7 @@
                         <img src="media/Jungle-Fu_Discolow_cover.jpg" alt="Jungle-Fu" class="release-img static">
                         <div class="release-info">
                             <span class="date">[ SIGNAL_INCOMING ]</span>
+                            <div class="release-tag">[ TAG: DISCOLOW_BINARY ]</div>
                             <h3>JUNGLE-FU - DISCOLOW</h3>
                             <p class="desc">High-frequency sonic interdiction. The next step in our evolution.</p>
                         </div>
@@ -50,6 +52,7 @@
                         </a>
                         <div class="release-info">
                             <span class="date">[ 26.09.2024 ]</span>
+                            <div class="release-tag">[ TAG: DISCOLOW_BINARY ]</div>
                             <h3>MONOLITE: SOUNDSCAPES - KOBOSE</h3>
                             <p class="desc">Site-specific immersive sound composition. Modular transmissions into the void.</p>
                             <a href="https://distrokid.com/hyperfollow/8b/monolite-soundscapes-intro" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
@@ -62,6 +65,7 @@
                         </a>
                         <div class="release-info">
                             <span class="date">[ 30.08.2023 ]</span>
+                            <div class="release-tag">[ TAG: DISCOLOW_BINARY ]</div>
                             <h3>CIRCOLO PROVARCI - 8B</h3>
                             <p class="desc">Experimental release [Discolow remix]. A motivational disco mantra for the human groove.</p>
                             <a href="https://distrokid.com/hyperfollow/8b/circolo-provarci-discolow-remix-2" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
@@ -74,6 +78,7 @@
                         </a>
                         <div class="release-info">
                             <span class="date">[ 08.12.2022 ]</span>
+                            <div class="release-tag">[ TAG: 8B_ARCHIVE ]</div>
                             <h3>DONE THIS WAY - 8B & THE AYE AYE DUBNTONESYSTEM</h3>
                             <p class="desc">An ode to Mother Earth and the preservation of the seed. Roots dub exploration.</p>
                             <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/done-this-way" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
@@ -86,6 +91,7 @@
                         </a>
                         <div class="release-info">
                             <span class="date">[ 08.10.2022 ]</span>
+                            <div class="release-tag">[ TAG: 8B_ARCHIVE ]</div>
                             <h3>BL4CKM4N - 8B & THE AYE AYE DUBNTONESYSTEM</h3>
                             <p class="desc">Deep instrumental grooveline with dub sounds and rootsy mantra vocals.</p>
                             <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/bl4ckm4n" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
@@ -98,6 +104,7 @@
                         </a>
                         <div class="release-info">
                             <span class="date">[ 08.08.2022 ]</span>
+                            <div class="release-tag">[ TAG: 8B_ARCHIVE ]</div>
                             <h3>100 SKIES - 8B & THE AYE AYE DUBNTONESYSTEM</h3>
                             <p class="desc">Milan-Jamaica snapshot through Reggae and Dub culture. First track with 8B on vocals.</p>
                             <a href="https://distrokid.com/hyperfollow/8bandtheayeayedubntonesystem/100-skies" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
@@ -110,6 +117,7 @@
                         </a>
                         <div class="release-info">
                             <span class="date">[ 22.05.2022 ]</span>
+                            <div class="release-tag">[ TAG: 8B_ARCHIVE ]</div>
                             <h3>SWING ME FOR A WHILE - 8B</h3>
                             <p class="desc">Homage to jazz and swing culture. Digital bebop result of analogue emotions.</p>
                             <a href="https://distrokid.com/hyperfollow/8b/swing-me-for-a-while" target="_blank" class="release-link">-> [ DECRYPT SOUND SIGNAL ]</a>
@@ -139,21 +147,42 @@
                         <span>CORE_DIRECTOR:</span>
                         <p>Kobose // <a href="mailto:info@ayeayerecords.com">info@ayeayerecords.com</a></p>
                     </div>
-                    <div class="node">
+                    <div class="node" style="margin-top: 20px;">
+                        <span>SIGNAL_OPERATOR:</span>
+                        <p>Lenrix // <a href="mailto:signal@ayeayerecords.com">signal@ayeayerecords.com</a></p>
+                    </div>
+                    <div class="node" style="margin-top: 20px;">
                         <span>HEADQUARTERS:</span>
                         <p>Aye Aye Records<br>Alzaia Naviglio Pavese 114, 20142 Milano, Italy</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <section id="volcano-sec" class="overlay-section">
+            <div class="overlay-close" onclick="closeAllSections()">[ CLOSE_X ]</div>
+            <div class="content-box">
+                <h2>[ SONIC_VOLCANO ]</h2>
+                <div style="line-height: 1.8; font-family: 'Space Mono', monospace;">
+                    <p style="opacity: 0.5; margin-bottom: 5px;">// STATUS: ACTIVE</p>
+                    <p style="opacity: 0.5; margin-bottom: 30px;">// AN IMMERSIVE 3-HOUR SOUND SYSTEM TRANSITION</p>
+                    
+                    <p style="margin-bottom: 12px;"><strong>LOG_01: SHIRA</strong> // 8B & I Chilimangiaro (Live Cantautorale Italiano - 30 min)</p>
+                    <p style="margin-bottom: 12px;"><strong>LOG_02: MAWENZI</strong> // I Chilimangiaro (Magma Roots, Dub & Funk - 50 min)</p>
+                    <p style="margin-bottom: 12px;"><strong>LOG_03: KIBO</strong> // Discolow DJ Set (Jazz-Step, Afro & Liquid DnB - 90 min)</p>
+                    
+                    <p style="margin-top: 40px;">--> <a href="javascript:void(0)" onclick="openSection('connect-sec')">[ REQUEST TRANSMISSION / CONNECT_NODES ]</a></p>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <div class="volcano-sound-container right-axis">
-        <div id="track-log" class="track-log">LOG: GILLESTEP - DISCOLOW [2026]</div>
+    <div class="volcano-sound-container right-axis" id="beat-container">
+        <div id="track-log" class="track-log">LOG: AYE AYE RADAR TRANSMISSION [SHUFFLE]</div>
         <button id="beat-btn" class="beat-btn" onclick="toggleBeat()">[ BEAT: OFF ]</button>
     </div>
 
-    <footer class="grid-footer">
+    <footer class="grid-footer" id="main-footer">
         <div class="footer-row-top">
             <div class="footer-corner-link left">
                 <a href="mailto:info@ayeayerecords.com" class="f-link">
@@ -162,7 +191,7 @@
             </div>
             
             <div class="footer-center">
-                <a href="javascript:void(0)" onclick="closeAllSections()" title="Back to Home">
+                <a href="javascript:void(0)" onclick="closeAllSections()" title="Torna alla Home">
                     <img src="media/AyeAyeRecords_col.png" alt="Logo" class="f-logo">
                 </a>
             </div>
@@ -182,11 +211,17 @@
         </div>
     </footer>
 
-    <audio id="audio-track" loop preload="auto" crossorigin="anonymous">
-        <source src="media/Discolow_Gillestep.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="audio-track" loop preload="auto" crossorigin="anonymous"></audio>
 
     <script>
+        // Array dei flussi audio caricati via FTP o Media Library
+        const radioPlaylist = [
+            "media/Discolow_Gillestep.mp3",
+            "media/Done_this-way_632x632bf.mp3", 
+            "media/bl4ckm4n_632x632bf.mp3"
+        ];
+        
+        let currentTrackIndex = -1;
         let isPlaying = false;
         window.audioAmp = 0; 
         let audioCtx, analyser, source, dataArray;
@@ -200,7 +235,7 @@
             document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); 
         }
 
-        function initAudio(audioElement) {
+        function initAudioEngine(audioElement) {
             if (!audioCtx) {
                 let AudioContext = window.AudioContext || window.webkitAudioContext;
                 audioCtx = new AudioContext();
@@ -211,8 +246,8 @@
                 analyser.connect(audioCtx.destination);
                 dataArray = new Uint8Array(analyser.frequencyBinCount);
                 
-                function update() { 
-                    requestAnimationFrame(update); 
+                function updateRadarAmplitude() { 
+                    requestAnimationFrame(updateRadarAmplitude); 
                     if (isPlaying) { 
                         analyser.getByteFrequencyData(dataArray); 
                         let sum = 0; 
@@ -222,19 +257,35 @@
                         window.audioAmp = 0; 
                     } 
                 }
-                update();
+                updateRadarAmplitude();
             }
         }
 
+        function triggerShuffleStream() {
+            let audio = document.getElementById('audio-track');
+            let nextIndex;
+            
+            if(radioPlaylist.length > 1) {
+                do {
+                    nextIndex = Math.floor(Math.random() * radioPlaylist.length);
+                } while (nextIndex === currentTrackIndex);
+            } else {
+                nextIndex = 0;
+            }
+            
+            currentTrackIndex = nextIndex;
+            audio.src = radioPlaylist[currentTrackIndex];
+            audio.play().catch(e => console.log("Stream synchronization blocked:", e));
+        }
+
         function toggleBeat() { 
-            // Cerca gli elementi dinamicamente quando clicchi
             let audio = document.getElementById('audio-track');
             let btn = document.getElementById('beat-btn');
             let trackLog = document.getElementById('track-log');
             
-            if(!audio) return; // Sicurezza extra
+            if(!audio) return;
             
-            initAudio(audio); 
+            initAudioEngine(audio); 
             if (audioCtx.state === 'suspended') audioCtx.resume();
             
             if (isPlaying) { 
@@ -243,13 +294,20 @@
                 btn.classList.remove('playing'); 
                 trackLog.classList.remove('active'); 
             } else { 
-                audio.play().catch(e => console.log("Segnale bloccato:", e)); 
+                if(currentTrackIndex === -1) {
+                    triggerShuffleStream();
+                } else {
+                    audio.play().catch(e => console.log("Signal blocked:", e)); 
+                }
                 btn.innerText = "[ BEAT: ON ]"; 
                 btn.classList.add('playing'); 
                 trackLog.classList.add('active'); 
             }
             isPlaying = !isPlaying;
         }
+
+        // Seamless transition al termine della traccia
+        document.getElementById('audio-track').addEventListener('ended', triggerShuffleStream);
     </script>
     <script src="sketch.js"></script>
 </body>
