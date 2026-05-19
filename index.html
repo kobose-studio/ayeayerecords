@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=5.1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -214,14 +214,15 @@
     <audio id="audio-track" preload="auto" crossorigin="anonymous"></audio>
 
     <script>
+        // Array aggiornato con estensioni .m4a
         const radioPlaylist = [
-            { path: "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.mp3", title: "100 SKIES - 8B & THE AYE AYE DUBNTONE SYSTEM" },
-            { path: "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.mp3", title: "BL4CKM4N - 8B & THE AYE AYE DUBNTONE SYSTEM" },
-            { path: "media/radio/Circolo Provarci - 8B.mp3", title: "CIRCOLO PROVARCI - 8B" },
-            { path: "media/radio/Done This Way - 8B & The Aye Aye Dubntone System.mp3", title: "DONE THIS WAY - 8B & THE AYE AYE DUBNTONE SYSTEM" },
-            { path: "media/radio/Gillestep - Discolow.mp3", title: "GILLESTEP - DISCOLOW" },
-            { path: "media/radio/Jungle-Fu - Discolow.mp3", title: "JUNGLE-FU - DISCOLOW" },
-            { path: "media/radio/Swing Me For A While - 8B.mp3", title: "SWING ME FOR A WHILE - 8B" }
+            { path: "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.m4a", title: "100 SKIES - 8B & THE AYE AYE DUBNTONE SYSTEM" },
+            { path: "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.m4a", title: "BL4CKM4N - 8B & THE AYE AYE DUBNTONE SYSTEM" },
+            { path: "media/radio/Circolo Provarci - 8B.m4a", title: "CIRCOLO PROVARCI - 8B" },
+            { path: "media/radio/Done This Way - 8B & The Aye Aye Dubntone System.m4a", title: "DONE THIS WAY - 8B & THE AYE AYE DUBNTONE SYSTEM" },
+            { path: "media/radio/Gillestep - Discolow.m4a", title: "GILLESTEP - DISCOLOW" },
+            { path: "media/radio/Jungle-Fu - Discolow.m4a", title: "JUNGLE-FU - DISCOLOW" },
+            { path: "media/radio/Swing Me For A While - 8B.m4a", title: "SWING ME FOR A WHILE - 8B" }
         ];
         
         let currentTrackIndex = -1;
@@ -289,7 +290,7 @@
             let playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
-                    // Buffer caricatp e riproduzione avviata con successo
+                    // Buffer caricato e riproduzione avviata con successo
                 }).catch(error => {
                     console.log("Autoplay policy error caught:", error);
                     trackLog.innerText = "LOG: SIGNAL_BLOCKED [RETRY]";
