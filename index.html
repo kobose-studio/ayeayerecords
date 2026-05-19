@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=4.0">
+    <link rel="stylesheet" href="style.css?v=4.1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -214,11 +214,18 @@
     <audio id="audio-track" loop preload="auto" crossorigin="anonymous"></audio>
 
     <script>
-        // Array dei flussi audio caricati via FTP o Media Library
+        // =========================================================
+        // ATTENZIONE: Carica questi file esatti nella cartella "media/radio"
+        // =========================================================
         const radioPlaylist = [
-            "media/Discolow_Gillestep.mp3",
-            "media/Done_this-way_632x632bf.mp3", 
-            "media/bl4ckm4n_632x632bf.mp3"
+            "media/radio/Gillestep - Discolow.mp3",
+            "media/radio/Jungle-Fu - Discolow.mp3",
+            "media/radio/Monolite - Kobose.mp3",
+            "media/radio/Circolo Provarci - 8B.mp3",
+            "media/radio/Done This Way - 8B & The Aye Aye Dubntone System.mp3",
+            "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.mp3",
+            "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.mp3",
+            "media/radio/Swing Me For A While - 8B.mp3"
         ];
         
         let currentTrackIndex = -1;
