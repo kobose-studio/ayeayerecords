@@ -1,90 +1,74 @@
-/* AYE AYE RECORDS - SIGNAL_COMMAND_CSS v3.3 [STABLE FIX]
-   - FIX: Beat button colore ripristinato (era nero)
-   - FIX: Beat button click forzato (z-index: 9999)
-*/
+/* =========================================================================
+   CHILIMANGIARO - STYLE.CSS (v4.0 STABLE ARCHIVE)
+   - FIXED: Mobile Layout-Shift Blocking (Ancoraggio assoluto)
+   - STYLING: Manifesto Typography hierarchies (Payoff ratio)
+   - SECURITY: No line wrap over legal components on standard smartphone sizes
+========================================================================= */
 
-:root { --neon-yellow: #f0ff00; --black: #050505; }
+:root { 
+    --bg-color: #064f34; 
+    --text-color: #FFFFFF; 
+    --accent-color: #D64933; 
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--black); color: var(--neon-yellow); font-family: 'Space Mono', monospace; height: 100vh; overflow: hidden; }
 
-/* ANTI BLUE GLITCH ASSOLUTO */
-a, a:link, a:visited, a:hover, a:active { color: var(--neon-yellow) !important; text-decoration: none !important; }
-a:hover { text-shadow: 0 0 10px var(--neon-yellow) !important; }
+body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Special Elite', cursive; height: 100vh; overflow: hidden; }
+a, a:visited, a:active { color: var(--text-color) !important; text-decoration: none !important; font-family: 'Special Elite', cursive !important; }
 
+/* FILTRO ANALOGICO DI SFONDO */
+body::before, .overlay::before { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.15; mix-blend-mode: overlay; z-index: 50; pointer-events: none; }
 #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-body::after { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%); background-size: 100% 4px; z-index: 2; pointer-events: none; }
-button, .overlay-close { pointer-events: auto; cursor: pointer; }
-.main-ui { position: relative; z-index: 10; height: 100%; pointer-events: none; }
-.terminal-header { position: fixed; top: 30px; left: 40px; z-index: 60; pointer-events: auto !important; cursor: pointer; }
-.logo-text { font-size: clamp(1.8rem, 8vw, 4rem); border-bottom: 2px solid var(--neon-yellow); display: inline-block; padding-bottom: 5px; letter-spacing: -2px; }
-.tagline { font-size: 0.8rem; opacity: 0.7; letter-spacing: 2px; margin-top: 5px; }
 
-.grid-nav { position: fixed; bottom: 130px; left: 40px; display: flex; flex-direction: column; gap: 10px; z-index: 100; pointer-events: auto !important; }
-.grid-link { font-size: 1.25rem; font-weight: 700; opacity: 0.4; transition: 0.3s; }
-.grid-link:hover { opacity: 1; transform: translateX(8px); }
+/* MAIN BLOCCHI */
+.main-ui { position: relative; z-index: 10; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; pointer-events: none; }
+h1.large-chilimangiaro { font-size: clamp(3rem, 10vw, 6rem); color: var(--accent-color); text-shadow: 0 0 30px rgba(214, 73, 51, 0.2); line-height: 1; }
+.tagline { font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; margin-top: 10px; }
+.mobile-text { display: none; } .desktop-text { display: inline; }
 
-/* =========================================
-   BEAT CONTROL: LA FORZATURA DEFINITIVA
-   ========================================= */
-.volcano-sound-container.right-axis { 
-    position: fixed; right: 40px; top: 50%; transform: translateY(-50%); 
-    z-index: 9999 !important; /* Priorità assoluta su TUTTO */
-    display: flex; flex-direction: column; align-items: flex-end; gap: 8px; 
-    pointer-events: auto !important; 
-}
-.beat-btn { 
-    padding: 10px 25px; min-width: 170px; 
-    background: transparent !important; 
-    border: 1px solid var(--neon-yellow) !important; 
-    color: var(--neon-yellow) !important; /* Colore ripristinato */
-    font-family: inherit; font-size: 0.9rem; transition: 0.3s; 
-    cursor: pointer !important; pointer-events: auto !important;
-}
-.beat-btn.playing { animation: pulse 2s infinite; background: rgba(240, 255, 0, 0.1) !important; }
-@keyframes pulse { 50% { box-shadow: 0 0 15px var(--neon-yellow); } }
-.track-log { font-size: 0.55rem; opacity: 0.2; text-transform: uppercase; letter-spacing: 1px; }
-.track-log.active { opacity: 1; }
+/* INTERFACCIA TRIGGER */
+.serial-number { position: fixed; top: 30px; left: 0; width: 100%; text-align: center; font-size: 0.8rem; letter-spacing: 2px; z-index: 300; cursor: pointer; transition: 0.3s; pointer-events: auto; }
+.serial-number .hover-text { display: none; color: var(--accent-color); font-weight: bold; }
+.serial-number:hover .default-text { display: none; }
+.serial-number:hover .hover-text { display: inline; text-shadow: 0 0 10px rgba(214, 73, 51, 0.5); }
 
-/* OVERLAYS (z-index 400: sotto al Beat e al Footer) */
-.overlay-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 400; display: none; flex-direction: column; padding: 80px 20px 120px 20px; overflow-y: auto; pointer-events: auto !important; }
-.overlay-section.active { display: flex; animation: scanFade 0.4s ease-out; }
-@keyframes scanFade { from { opacity: 0; } to { opacity: 1; } }
-.content-box { max-width: 800px; margin: 0 auto; width: 100%; }
-.content-box h2 { font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid var(--neon-yellow); padding-bottom: 10px; }
-.overlay-close { position: fixed; top: 20px; right: 20px; font-size: 0.8rem; border: 1px solid var(--neon-yellow); padding: 5px 12px; background: var(--black); z-index: 500; }
+/* CONTROLLO SUONO */
+.volcano-sound-container { position: fixed; bottom: 25vh; left: 50%; transform: translateX(-50%); z-index: 300; display: flex; flex-direction: column; align-items: center; }
+#magma-sound-btn { padding: 12px 30px; min-width: 280px; background: transparent; border: 2px solid var(--accent-color); color: var(--accent-color); font-family: inherit; font-size: 1rem; cursor: pointer; transition: 0.3s; pointer-events: auto; }
+#magma-sound-btn:hover, #magma-sound-btn.playing { background-color: rgba(214, 73, 51, 0.15); box-shadow: 0 0 20px rgba(214, 73, 51, 0.5); }
+.track-credits { font-size: 0.65rem; opacity: 0.15; margin-top: 15px; letter-spacing: 2px; text-transform: uppercase; transition: 0.8s; }
+.track-credits.active { opacity: 1; }
 
-.flex-item { display: flex; align-items: center; gap: 25px; }
-.release-item { border-left: 1px solid rgba(240, 255, 0, 0.3); padding-left: 20px; margin-bottom: 40px; }
-.release-img { width: 130px; height: 130px; border: 1px solid rgba(240, 255, 0, 0.3); object-fit: cover; filter: sepia(100%) hue-rotate(15deg) saturate(500%) brightness(0.6) contrast(1.2); transition: 0.5s ease; }
-.release-item:hover .release-img { filter: none; border-color: var(--neon-yellow); box-shadow: 0 0 15px rgba(240, 255, 0, 0.3); }
-.release-link { font-size: 0.75rem; font-weight: 700; }
+/* SOTTOPAGINA OVERLAY MANIFESTO */
+.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(6, 79, 52, 0.98); z-index: 400; display: none; justify-content: center; align-items: center; overflow-y: auto; pointer-events: auto; }
+.overlay.active { display: flex; }
+.overlay-content { max-width: 800px; width: 90%; text-align: center; padding: 40px 20px; margin: auto; }
+.m-highlight { color: var(--accent-color); font-size: 2.5rem; margin-bottom: 5px; }
+.m-subhighlight { font-size: 1rem; opacity: 0.6; margin-bottom: 35px; text-transform: uppercase; letter-spacing: 2px; }
+.manifesto-body p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 22px; text-align: center; }
+.m-footer { margin-top: 40px; font-style: italic; opacity: 0.8; color: var(--accent-color); }
+.close-manifesto { position: fixed; top: 30px; right: 40px; background: transparent; border: 1px solid var(--text-color); color: var(--text-color); padding: 10px 20px; cursor: pointer; z-index: 420; }
 
-/* FOOTER Z-index a 500 */
-.grid-footer { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 500; padding: 10px 40px 10px 40px; display: flex; flex-direction: column; gap: 5px; background: transparent; pointer-events: none; }
-.footer-row-top { display: flex; justify-content: space-between; align-items: center; width: 100%; pointer-events: none; }
-.footer-corner-link.left { flex: 1; display: flex; justify-content: flex-start; pointer-events: auto !important; }
-.footer-center { flex: 1; display: flex; justify-content: center; pointer-events: auto !important; cursor: pointer; }
-.footer-corner-link.right { flex: 1; display: flex; justify-content: flex-end; pointer-events: auto !important; }
-.f-logo { height: 68px; width: auto; opacity: 0.8; transition: 0.3s; }
-.f-logo:hover { filter: drop-shadow(0 0 10px var(--neon-yellow)); transform: scale(1.05); }
-.f-link { font-size: 0.85rem; opacity: 0.5; display: flex; align-items: center; gap: 8px; }
+/* FOOTER GENERALE */
+footer { position: fixed; bottom: 30px; left: 0; width: 100%; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; z-index: 100; pointer-events: none; }
+.footer-block { flex: 1; pointer-events: auto; }
+.footer-block.left { display: flex; justify-content: flex-start; }
+.footer-block.center { display: flex; justify-content: center; }
+.footer-block.right { display: flex; justify-content: flex-end; }
+.footer-link { font-size: 0.95rem; display: flex; align-items: center; gap: 8px; opacity: 0.7; }
+.footer-link:hover { color: var(--accent-color) !important; opacity: 1; }
+.credits-line { font-size: 0.8rem; opacity: 0.7; letter-spacing: 1px; }
+.credits-line a { border-bottom: 1px solid var(--text-color); }
 
-/* LEGAL ROW */
-.footer-row-legal { display: flex; justify-content: space-between; font-size: 0.7rem; opacity: 0.5; letter-spacing: 1px; border-top: 1px solid rgba(240, 255, 0, 0.1); padding-top: 5px; pointer-events: auto !important;}
-.legal-right-group { display: flex; gap: 30px; }
-.design-credit a { border-bottom: 1px solid rgba(240,255,0,0.4); transition: 0.3s; }
-.design-credit a:hover { border-bottom-color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow); }
-
+/* SISTEMA RESPONSIVE MOBILE */
 @media (max-width: 768px) {
-    .terminal-header { position: relative; top: 20px; left: 20px; margin-bottom: 30px; }
-    .grid-nav { position: relative; bottom: auto; left: 20px; margin-bottom: 30px; }
-    
-    /* BEAT SEMPRE SOPRA TUTTO SU MOBILE */
-    .volcano-sound-container.right-axis { position: fixed; top: 60%; left: 50%; right: auto; transform: translate(-50%, -50%); align-items: center; width: auto; z-index: 9999 !important; }
-    
-    .grid-footer { position: fixed; bottom: 0; background: rgba(5, 5, 5, 0.95); padding: 15px 20px; }
-    .footer-row-top { flex-direction: column; align-items: center; gap: 15px; }
-    .footer-row-legal { flex-direction: column; align-items: center; gap: 5px; text-align: center; }
-    .legal-right-group { flex-direction: column; gap: 5px; }
-    .overlay-section { padding-bottom: 180px; } 
+    .mobile-text { display: block; } .desktop-text { display: none; }
+    h1.large-chilimangiaro { font-size: 3.5rem; line-height: 0.9; margin-bottom: 15px; }
+    footer { position: fixed; bottom: 0; padding: 15px 10px; flex-direction: column; gap: 8px; background: rgba(0,0,0,0.6); pointer-events: auto; }
+    .footer-block { justify-content: center; text-align: center; }
+    .volcano-sound-container { bottom: 150px; left: 50%; transform: translateX(-50%); width: 100%; }
+    #magma-sound-btn { min-width: 220px; }
+    .overlay-content h2.m-highlight { font-size: 1.8rem; }
+    .manifesto-body p { font-size: 0.95rem; line-height: 1.6; }
+    body { overflow: hidden; }
 }
