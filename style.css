@@ -1,6 +1,7 @@
 /* =========================================================================
-   AYE AYE RECORDS - STYLE.CSS (v4.2 STABLE ARCHIVE)
-   - FIX: Highlight Background for Upcoming Release
+   AYE AYE RECORDS - STYLE.CSS (v4.6 STABLE ARCHIVE)
+   - FIX: CSS Truncation restored (Footer and Tags are back!)
+   - FIX: Upcoming Release Outline removed (Only background fill)
 ========================================================================= */
 
 :root { 
@@ -41,10 +42,9 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 .beat-btn { padding: 10px 25px; min-width: 170px; background: transparent !important; border: 1px solid var(--neon-yellow) !important; color: var(--neon-yellow) !important; font-family: inherit; font-size: 0.9rem; transition: 0.3s; cursor: pointer !important; pointer-events: auto !important; }
 .beat-btn.playing { animation: pulse 2s infinite; background: rgba(240, 255, 0, 0.1) !important; }
 @keyframes pulse { 50% { box-shadow: 0 0 15px var(--neon-yellow); } }
-.track-log { font-size: 0.55rem; opacity: 0.2; text-transform: uppercase; letter-spacing: 1px; }
-.track-log.active { opacity: 1; }
+.track-log { font-size: 0.65rem; opacity: 0.3; text-transform: uppercase; letter-spacing: 1px; transition: 0.5s; }
 
-/* PANNELLI OVERLAY SEZIONI (z-index 400) */
+/* PANNELLI OVERLAY SEZIONI */
 .overlay-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 5, 0.98); z-index: 400; display: none; flex-direction: column; padding: 80px 20px 140px 20px; overflow-y: auto; pointer-events: auto !important; }
 .overlay-section.active { display: flex; animation: scanFade 0.4s ease-out; }
 @keyframes scanFade { from { opacity: 0; } to { opacity: 1; } }
@@ -52,21 +52,59 @@ button, .overlay-close { pointer-events: auto; cursor: pointer; }
 .content-box h2 { font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid var(--neon-yellow); padding-bottom: 10px; }
 .overlay-close { position: fixed; top: 20px; right: 20px; font-size: 0.8rem; border: 1px solid var(--neon-yellow); padding: 5px 12px; background: var(--black); z-index: 500; }
 
-/* CATALOGO RELEASES E IMMAGINI A FOSFORI GIALLI */
+/* CATALOGO RELEASES E IMMAGINI */
 .flex-item { display: flex; align-items: center; gap: 25px; }
 .release-item { border-left: 1px solid rgba(240, 255, 0, 0.3); padding-left: 20px; margin-bottom: 40px; }
 .release-img { width: 130px; height: 130px; border: 1px solid rgba(240, 255, 0, 0.3); object-fit: cover; filter: sepia(100%) hue-rotate(15deg) saturate(500%) brightness(0.6) contrast(1.2); transition: 0.5s ease; }
 .release-item:hover .release-img { filter: none; border-color: var(--neon-yellow); box-shadow: 0 0 15px rgba(240, 255, 0, 0.3); }
 .release-link { font-size: 0.75rem; font-weight: 700; }
 
-/* MODIFICA 3: BACKGROUND OVERLAY PER LA UPCOMING TRACK */
+/* BACKGROUND OVERLAY PER LA UPCOMING TRACK (Senza Outline) */
 .upcoming-bg {
     background: rgba(240, 255, 0, 0.12);
-    border: 1px solid rgba(240, 255, 0, 0.3);
-    border-left: 4px solid var(--neon-yellow);
+    border: none;
+    border-left: none;
     padding: 15px;
     box-shadow: inset 0 0 20px rgba(240, 255, 0, 0.05);
+    margin-bottom: 40px;
 }
 
-/* INTERFACCIA DEL NUOVO TAG OPERATIVO */
-.release-tag { display: inline-block; font-size: 0.65rem; color: var(--black
+/* INTERFACCIA DEL NUOVO TAG OPERATIVO (Codice Ripristinato!) */
+.release-tag { 
+    display: inline-block; 
+    font-size: 0.65rem; 
+    color: var(--black); 
+    background-color: var(--neon-yellow); 
+    padding: 2px 6px; 
+    margin: 5px 0 8px 0; 
+    font-weight: bold; 
+    letter-spacing: 1px; 
+}
+
+/* FOOTER ANCORATO (z-index 500) */
+.grid-footer { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 500; padding: 10px 40px 10px 40px; display: flex; flex-direction: column; gap: 5px; background: transparent; pointer-events: none; }
+.footer-row-top { display: flex; justify-content: space-between; align-items: center; width: 100%; pointer-events: none; }
+.footer-corner-link.left { flex: 1; display: flex; justify-content: flex-start; pointer-events: auto !important; }
+.footer-center { flex: 1; display: flex; justify-content: center; pointer-events: auto !important; cursor: pointer; }
+.footer-corner-link.right { flex: 1; display: flex; justify-content: flex-end; pointer-events: auto !important; }
+.f-logo { height: 68px; width: auto; opacity: 0.8; transition: 0.3s; }
+.f-logo:hover { filter: drop-shadow(0 0 10px var(--neon-yellow)); transform: scale(1.05); }
+.f-link { font-size: 0.85rem; opacity: 0.5; display: flex; align-items: center; gap: 8px; }
+
+/* RIGA LEGALE COMPATTA & NUOVO POSIZIONAMENTO DESIGN */
+.footer-row-legal { display: flex; justify-content: space-between; font-size: 0.7rem; opacity: 0.5; letter-spacing: 1px; border-top: 1px solid rgba(240, 255, 0, 0.1); padding-top: 5px; pointer-events: auto !important; }
+.legal-right-group { display: flex; gap: 30px; }
+.design-credit a { border-bottom: 1px solid rgba(240,255,0,0.4); transition: 0.3s; }
+.design-credit a:hover { border-bottom-color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow); }
+
+/* LAYOUT DINAMICO PER APPARATI MOBILE */
+@media (max-width: 768px) {
+    .terminal-header { position: relative; top: 20px; left: 20px; margin-bottom: 30px; }
+    .grid-nav { position: relative; bottom: auto; left: 20px; margin-bottom: 30px; }
+    .volcano-sound-container.right-axis { position: fixed; top: 58%; left: 50%; right: auto; transform: translate(-50%, -50%); align-items: center; width: auto; z-index: 9999 !important; }
+    .grid-footer { position: fixed; bottom: 0; background: rgba(5, 5, 5, 0.95); padding: 15px 20px; }
+    .footer-row-top { flex-direction: column; align-items: center; gap: 15px; }
+    .footer-row-legal { flex-direction: column; align-items: center; gap: 5px; text-align: center; }
+    .legal-right-group { flex-direction: column; gap: 5px; }
+    .overlay-section { padding-bottom: 190px; }
+}
