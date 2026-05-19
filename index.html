@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=4.3">
+    <link rel="stylesheet" href="style.css?v=4.4">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -214,14 +214,14 @@
     <audio id="audio-track" preload="auto" crossorigin="anonymous"></audio>
 
     <script>
+        // Array aggiornato esattamente con i nomi visibili nello screenshot GitHub (Senza Monolite)
         const radioPlaylist = [
-            "media/radio/Gillestep - Discolow.mp3",
-            "media/radio/Jungle-Fu - Discolow.mp3",
-            "media/radio/Monolite - Kobose.mp3",
+            "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.mp3",
+            "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.mp3",
             "media/radio/Circolo Provarci - 8B.mp3",
             "media/radio/Done This Way - 8B & The Aye Aye Dubntone System.mp3",
-            "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.mp3",
-            "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.mp3",
+            "media/radio/Gillestep - Discolow.mp3",
+            "media/radio/Jungle-Fu - Discolow.mp3",
             "media/radio/Swing Me For A While - 8B.mp3"
         ];
         
@@ -269,6 +269,7 @@
             let audio = document.getElementById('audio-track');
             let nextIndex;
             
+            // Random Shuffle: non ripete la traccia appena suonata
             if(radioPlaylist.length > 1) {
                 do {
                     nextIndex = Math.floor(Math.random() * radioPlaylist.length);
@@ -298,6 +299,7 @@
                 btn.classList.remove('playing'); 
                 trackLog.classList.remove('active'); 
             } else { 
+                // Innesca lo shuffle solo la prima volta che premi ON
                 if(currentTrackIndex === -1) {
                     triggerShuffleStream();
                 } else {
@@ -310,7 +312,7 @@
             isPlaying = !isPlaying;
         }
 
-        // Seamless transition al termine della traccia
+        // Loop continuo: passa alla traccia successiva appena finisce
         document.getElementById('audio-track').addEventListener('ended', triggerShuffleStream);
     </script>
     <script src="sketch.js"></script>
