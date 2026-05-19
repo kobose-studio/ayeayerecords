@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=4.5">
+    <link rel="stylesheet" href="style.css?v=4.6">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -34,7 +34,7 @@
                 
                 <div class="upcoming-release">
                     <div class="signal-tag">SIGNAL_LOCKED: UPCOMING</div>
-                    <div class="release-item highlight upcoming-bg flex-item">
+                    <div class="release-item upcoming-bg flex-item">
                         <img src="media/Jungle-Fu_Discolow_cover.jpg" alt="Jungle-Fu" class="release-img static">
                         <div class="release-info">
                             <span class="date">[ SIGNAL_INCOMING ]</span>
@@ -178,7 +178,7 @@
     </main>
 
     <div class="volcano-sound-container right-axis" id="beat-container">
-        <div id="track-log" class="track-log">LOG: AYE AYE RADAR TRANSMISSION [SHUFFLE]</div>
+        <div id="track-log" class="track-log">LOG: RADIO STANDBY</div>
         <button id="beat-btn" class="beat-btn" onclick="toggleBeat()">[ BEAT: OFF ]</button>
     </div>
 
@@ -214,14 +214,15 @@
     <audio id="audio-track" preload="auto" crossorigin="anonymous"></audio>
 
     <script>
+        // Array strutturato: contiene sia il percorso del file che il TITOLO DA MOSTRARE
         const radioPlaylist = [
-            "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.mp3",
-            "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.mp3",
-            "media/radio/Circolo Provarci - 8B.mp3",
-            "media/radio/Done This Way - 8B & The Aye Aye Dubntone System.mp3",
-            "media/radio/Gillestep - Discolow.mp3",
-            "media/radio/Jungle-Fu - Discolow.mp3",
-            "media/radio/Swing Me For A While - 8B.mp3"
+            { path: "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.mp3", title: "100 SKIES - 8B & THE AYE AYE DUBNTONE SYSTEM" },
+            { path: "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.mp3", title: "BL4CKM4N - 8B & THE AYE AYE DUBNTONE SYSTEM" },
+            { path: "media/radio/Circolo Provarci - 8B.mp3", title: "CIRCOLO PROVARCI - 8B" },
+            { path: "media/radio/Done This Way - 8B & The Aye Aye Dubntone System.mp3", title: "DONE THIS WAY - 8B" },
+            { path: "media/radio/Gillestep - Discolow.mp3", title: "GILLESTEP - DISCOLOW" },
+            { path: "media/radio/Jungle-Fu - Discolow.mp3", title: "JUNGLE-FU - DISCOLOW" },
+            { path: "media/radio/Swing Me For A While - 8B.mp3", title: "SWING ME FOR A WHILE - 8B" }
         ];
         
         let currentTrackIndex = -1;
@@ -239,7 +240,6 @@
             document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); 
         }
 
-        // Il motore si innesca solo al primo click dell'utente per bypassare il blocco browser
         function initAudioEngine(audioElement) {
             if (isAudioEngineInitialized) return;
             
@@ -269,9 +269,9 @@
 
         function triggerShuffleStream() {
             let audio = document.getElementById('audio-track');
+            let trackLog = document.getElementById('track-log');
             let nextIndex;
             
-            // Logica Shuffle Anti-Ripetizione
             if(radioPlaylist.length > 1) {
                 do {
                     nextIndex = Math.floor(Math.random() * radioPlaylist.length);
@@ -281,17 +281,21 @@
             }
             
             currentTrackIndex = nextIndex;
-            audio.src = radioPlaylist[currentTrackIndex];
+            let currentTrack = radioPlaylist[currentTrackIndex];
             
-            // Carica esplicitamente prima di suonare
+            audio.src = currentTrack.path;
+            
+            // AGGIORNA IL TESTO CON IL NOME DELLA CANZONE IN RIPRODUZIONE
+            trackLog.innerText = "LOG: " + currentTrack.title;
+            
             audio.load();
-            
             let playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
-                    // Playback iniziato
+                    // Playback OK
                 }).catch(error => {
-                    console.log("Autoplay bloccato dal browser. Clicca di nuovo sul bottone:", error);
+                    console.log("Playback bloccato dal browser:", error);
+                    trackLog.innerText = "LOG: SIGNAL BLOCKED";
                 });
             }
         }
@@ -303,7 +307,6 @@
             
             if(!audio) return;
             
-            // Se è il primissimo click, inneschiamo l'engine e la prima traccia
             if (!isAudioEngineInitialized) {
                 initAudioEngine(audio);
                 if (audioCtx.state === 'suspended') { audioCtx.resume(); }
@@ -315,22 +318,21 @@
                 return;
             }
             
-            // Gestione normale Pausa/Play dopo il primo innesco
             if (isPlaying) { 
                 audio.pause(); 
                 btn.innerText = "[ BEAT: OFF ]"; 
                 btn.classList.remove('playing'); 
-                trackLog.classList.remove('active'); 
+                trackLog.innerText = "LOG: RADIO STANDBY";
             } else { 
                 audio.play(); 
                 btn.innerText = "[ BEAT: ON ]"; 
                 btn.classList.add('playing'); 
-                trackLog.classList.add('active'); 
+                // Rimette il titolo della traccia attualmente caricata
+                trackLog.innerText = "LOG: " + radioPlaylist[currentTrackIndex].title;
             }
             isPlaying = !isPlaying;
         }
 
-        // Loop continuo: passa alla traccia successiva appena finisce
         document.getElementById('audio-track').addEventListener('ended', triggerShuffleStream);
     </script>
     <script src="sketch.js"></script>
