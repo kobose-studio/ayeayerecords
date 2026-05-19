@@ -6,7 +6,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=4.4">
+    <link rel="stylesheet" href="style.css?v=4.5">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -167,7 +167,7 @@
                     <p style="opacity: 0.5; margin-bottom: 5px;">// STATUS: ACTIVE</p>
                     <p style="opacity: 0.5; margin-bottom: 30px;">// AN IMMERSIVE 3-HOUR SOUND SYSTEM TRANSITION</p>
                     
-                    <p style="margin-bottom: 12px;"><strong>LOG_01: SHIRA</strong> // 8B (Live Cantautorale Italiano, Reggae Folk - 30 min)</p>
+                    <p style="margin-bottom: 12px;"><strong>LOG_01: SHIRA</strong> // 8B (Live Singer-Songwriter Set, Nu Reggae - 30 min)</p>
                     <p style="margin-bottom: 12px;"><strong>LOG_02: MAWENZI</strong> // 8B & I Chilimangiaro (Magma Roots, Dub & Funk - 50 min)</p>
                     <p style="margin-bottom: 12px;"><strong>LOG_03: KIBO</strong> // Discolow DJ Set (Jazz-Step, Afro & Liquid DnB - 90 min)</p>
                     
@@ -214,7 +214,6 @@
     <audio id="audio-track" preload="auto" crossorigin="anonymous"></audio>
 
     <script>
-        // Array aggiornato esattamente con i nomi visibili nello screenshot GitHub (Senza Monolite)
         const radioPlaylist = [
             "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.mp3",
             "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.mp3",
@@ -229,6 +228,7 @@
         let isPlaying = false;
         window.audioAmp = 0; 
         let audioCtx, analyser, source, dataArray;
+        let isAudioEngineInitialized = false;
         
         function openSection(id) { 
             closeAllSections(); 
@@ -239,37 +239,39 @@
             document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); 
         }
 
+        // Il motore si innesca solo al primo click dell'utente per bypassare il blocco browser
         function initAudioEngine(audioElement) {
-            if (!audioCtx) {
-                let AudioContext = window.AudioContext || window.webkitAudioContext;
-                audioCtx = new AudioContext();
-                analyser = audioCtx.createAnalyser(); 
-                analyser.fftSize = 256;
-                source = audioCtx.createMediaElementSource(audioElement); 
-                source.connect(analyser); 
-                analyser.connect(audioCtx.destination);
-                dataArray = new Uint8Array(analyser.frequencyBinCount);
-                
-                function updateRadarAmplitude() { 
-                    requestAnimationFrame(updateRadarAmplitude); 
-                    if (isPlaying) { 
-                        analyser.getByteFrequencyData(dataArray); 
-                        let sum = 0; 
-                        for(let i=0; i<dataArray.length; i++) sum += dataArray[i]; 
-                        window.audioAmp = sum / dataArray.length; 
-                    } else { 
-                        window.audioAmp = 0; 
-                    } 
-                }
-                updateRadarAmplitude();
+            if (isAudioEngineInitialized) return;
+            
+            let AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+            analyser = audioCtx.createAnalyser(); 
+            analyser.fftSize = 256;
+            source = audioCtx.createMediaElementSource(audioElement); 
+            source.connect(analyser); 
+            analyser.connect(audioCtx.destination);
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+            
+            function updateRadarAmplitude() { 
+                requestAnimationFrame(updateRadarAmplitude); 
+                if (isPlaying) { 
+                    analyser.getByteFrequencyData(dataArray); 
+                    let sum = 0; 
+                    for(let i=0; i<dataArray.length; i++) sum += dataArray[i]; 
+                    window.audioAmp = sum / dataArray.length; 
+                } else { 
+                    window.audioAmp = 0; 
+                } 
             }
+            updateRadarAmplitude();
+            isAudioEngineInitialized = true;
         }
 
         function triggerShuffleStream() {
             let audio = document.getElementById('audio-track');
             let nextIndex;
             
-            // Random Shuffle: non ripete la traccia appena suonata
+            // Logica Shuffle Anti-Ripetizione
             if(radioPlaylist.length > 1) {
                 do {
                     nextIndex = Math.floor(Math.random() * radioPlaylist.length);
@@ -280,7 +282,18 @@
             
             currentTrackIndex = nextIndex;
             audio.src = radioPlaylist[currentTrackIndex];
-            audio.play().catch(e => console.log("Stream synchronization blocked:", e));
+            
+            // Carica esplicitamente prima di suonare
+            audio.load();
+            
+            let playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Playback iniziato
+                }).catch(error => {
+                    console.log("Autoplay bloccato dal browser. Clicca di nuovo sul bottone:", error);
+                });
+            }
         }
 
         function toggleBeat() { 
@@ -290,21 +303,26 @@
             
             if(!audio) return;
             
-            initAudioEngine(audio); 
-            if (audioCtx.state === 'suspended') audioCtx.resume();
+            // Se è il primissimo click, inneschiamo l'engine e la prima traccia
+            if (!isAudioEngineInitialized) {
+                initAudioEngine(audio);
+                if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+                triggerShuffleStream();
+                btn.innerText = "[ BEAT: ON ]"; 
+                btn.classList.add('playing'); 
+                trackLog.classList.add('active');
+                isPlaying = true;
+                return;
+            }
             
+            // Gestione normale Pausa/Play dopo il primo innesco
             if (isPlaying) { 
                 audio.pause(); 
                 btn.innerText = "[ BEAT: OFF ]"; 
                 btn.classList.remove('playing'); 
                 trackLog.classList.remove('active'); 
             } else { 
-                // Innesca lo shuffle solo la prima volta che premi ON
-                if(currentTrackIndex === -1) {
-                    triggerShuffleStream();
-                } else {
-                    audio.play().catch(e => console.log("Signal blocked:", e)); 
-                }
+                audio.play(); 
                 btn.innerText = "[ BEAT: ON ]"; 
                 btn.classList.add('playing'); 
                 trackLog.classList.add('active'); 
