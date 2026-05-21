@@ -1,5 +1,5 @@
      // ==========================================
-        // DEEP SUB PAGE LINKING [UPDATE]
+        // UPCOMING RELEASE + SONIC SHOW [TXT UPDATE]
         // ==========================================
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=5.2">
+    <link rel="stylesheet" href="style.css?v=5.3">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -44,7 +44,8 @@
                             <span class="date">[ SIGNAL_INCOMING ]</span>
                             <div class="release-tag">[ CODE: DISCOLOW_BINARY ]</div>
                             <h3>JUNGLE-FU - DISCOLOW</h3>
-                            <p class="desc">High-frequency sonic interdiction. The next step in our evolution.</p>
+                            <p class="desc">High-frequency sonic interdiction. The first extraction from the upcoming album "Jazz N Buzz (Iteration B1)".</p>
+                            <div class="release-link" style="opacity: 0.6;">-> [ STATUS: COMPILING_MASTER ]</div>
                         </div>
                     </div>
                 </div>
@@ -172,7 +173,7 @@
                     <p style="opacity: 0.5; margin-bottom: 30px;">// AN IMMERSIVE 3-HOUR SOUND SYSTEM TRANSITION</p>
                     
                     <p style="margin-bottom: 12px;"><strong>LOG_01: SHIRA</strong> // 8B (Live Singer-Songwriter Set, Nu Reggae - 30 min)</p>
-                    <p style="margin-bottom: 12px;"><strong>LOG_02: MAWENZI</strong> // 8B & I Chilimangiaro (Magma Roots, Dub & Funk - 50 min)</p>
+                    <p style="margin-bottom: 12px;"><strong>LOG_02: MAWENZI</strong> // 8B & I Chilimangiaro (Magma Roots, Dub & Funk - 60 min)</p>
                     <p style="margin-bottom: 12px;"><strong>LOG_03: KIBO</strong> // Discolow DJ Set (Jazz-Step, Afro & Liquid DnB - 90 min)</p>
                     
                     <p style="margin-top: 40px;">--> <a href="javascript:void(0)" onclick="openSection('connect-sec')">[ REQUEST TRANSMISSION / CONNECT_NODES ]</a></p>
@@ -234,17 +235,13 @@
         let audioCtx, analyser, source, dataArray;
         let isAudioEngineInitialized = false;
         
-        // ==========================================
-        // ARCHITETTURA DI HASH ROUTING (DEEP LINKING)
-        // ==========================================
         function openSection(id) { 
             let hashName = id.replace('-sec', '');
-            if (hashName === 'manifesto') hashName = 'protocol'; // Maschera l'URL in /#protocol
+            if (hashName === 'manifesto') hashName = 'protocol';
             window.location.hash = hashName;
         }
         
         function closeAllSections() { 
-            // Pulisce l'URL dall'hash tornando alla radice senza ricaricare la pagina
             if (window.location.hash) {
                 history.pushState("", document.title, window.location.pathname + window.location.search);
             }
@@ -257,7 +254,7 @@
             
             if (hash) {
                 let sectionId = hash + '-sec';
-                if (hash === 'protocol') sectionId = 'manifesto-sec'; // Riconduce l'alias all'ID corretto
+                if (hash === 'protocol') sectionId = 'manifesto-sec';
                 
                 let targetElement = document.getElementById(sectionId);
                 if (targetElement) {
@@ -266,13 +263,9 @@
             }
         }
 
-        // Ascoltatori dei nodi di navigazione browser
         window.addEventListener('hashchange', handleRouting);
         window.addEventListener('load', handleRouting);
 
-        // ==========================================
-        // AUDIO SHUFFLE ENGINE
-        // ==========================================
         function initAudioEngine(audioElement) {
             if (isAudioEngineInitialized) return;
             
