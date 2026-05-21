@@ -1,3 +1,7 @@
+     // ==========================================
+        // DEEP SUB PAGE LINKING [UPDATE]
+        // ==========================================
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -6,7 +10,7 @@
     <title>AYE AYE RECORDS | Signal Command</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=5.1">
+    <link rel="stylesheet" href="style.css?v=5.2">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
 </head>
 <body>
@@ -214,7 +218,6 @@
     <audio id="audio-track" preload="auto" crossorigin="anonymous"></audio>
 
     <script>
-        // Array aggiornato con estensioni .m4a
         const radioPlaylist = [
             { path: "media/radio/100 Skies - 8B & The Aye Aye Dubntone System.m4a", title: "100 SKIES - 8B & THE AYE AYE DUBNTONE SYSTEM" },
             { path: "media/radio/Bl4ckm4n - 8B & The Aye Aye Dubntone System.m4a", title: "BL4CKM4N - 8B & THE AYE AYE DUBNTONE SYSTEM" },
@@ -231,15 +234,45 @@
         let audioCtx, analyser, source, dataArray;
         let isAudioEngineInitialized = false;
         
+        // ==========================================
+        // ARCHITETTURA DI HASH ROUTING (DEEP LINKING)
+        // ==========================================
         function openSection(id) { 
-            closeAllSections(); 
-            document.getElementById(id).classList.add('active'); 
+            let hashName = id.replace('-sec', '');
+            if (hashName === 'manifesto') hashName = 'protocol'; // Maschera l'URL in /#protocol
+            window.location.hash = hashName;
         }
         
         function closeAllSections() { 
+            // Pulisce l'URL dall'hash tornando alla radice senza ricaricare la pagina
+            if (window.location.hash) {
+                history.pushState("", document.title, window.location.pathname + window.location.search);
+            }
             document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); 
         }
 
+        function handleRouting() {
+            let hash = window.location.hash.replace('#', '');
+            document.querySelectorAll('.overlay-section').forEach(s => s.classList.remove('active')); 
+            
+            if (hash) {
+                let sectionId = hash + '-sec';
+                if (hash === 'protocol') sectionId = 'manifesto-sec'; // Riconduce l'alias all'ID corretto
+                
+                let targetElement = document.getElementById(sectionId);
+                if (targetElement) {
+                    targetElement.classList.add('active');
+                }
+            }
+        }
+
+        // Ascoltatori dei nodi di navigazione browser
+        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('load', handleRouting);
+
+        // ==========================================
+        // AUDIO SHUFFLE ENGINE
+        // ==========================================
         function initAudioEngine(audioElement) {
             if (isAudioEngineInitialized) return;
             
@@ -290,9 +323,9 @@
             let playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
-                    // Buffer caricato e riproduzione avviata con successo
+                    // Stream attivo
                 }).catch(error => {
-                    console.log("Autoplay policy error caught:", error);
+                    console.log("Autoplay policy restriction:", error);
                     trackLog.innerText = "LOG: SIGNAL_BLOCKED [RETRY]";
                 });
             }
